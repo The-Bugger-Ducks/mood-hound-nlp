@@ -50,8 +50,14 @@ analysis_table = {
 }
 analysis_table = pd.DataFrame(analysis_table)
 analysis_table.index = ['Antes das adaptações', 'Depois das adaptações']
-# analysis_table
+print('=============================================================================')
+print('Análise exploratória e adaptações')
+print('=============================================================================')
+print(analysis_table)
 
 # Dados depois das adaptações
 df = df_after
-# df.head(5)
+print('=============================================================================')
+print('Dados depois das adaptações')
+print('=============================================================================')
+print(df.head(5))
