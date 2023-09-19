@@ -3,7 +3,7 @@ from datetime import datetime
 import uuid
 
 # Conectar ao banco de dados MongoDB
-client = pymongo.MongoClient('mongodb+srv://joao:receba@clusterpln.n768zhk.mongodb.net/')  
+client = pymongo.MongoClient('mongo cluster connection')  
 db = client['pln']
 
 # Coleção para dados de PLN
