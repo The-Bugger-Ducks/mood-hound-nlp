@@ -2,8 +2,12 @@ import os
 import sys
 utils_path = os.path.dirname(os.path.realpath(__file__)) + '\\utils'
 sys.path.insert(0, utils_path)
+pipeline_path = os.path.dirname(os.path.realpath(__file__)) + '\\pipeline'
+sys.path.insert(0, pipeline_path)
 
 import print_topic
+import organize_rating
+import format_comments
 import pandas as pd
 pd.set_option('max_colwidth', 400)
 import numpy as np
@@ -11,8 +15,8 @@ import re
 from unidecode import unidecode
 import spacy
 import nltk
-from nltk import FreqDist
 import  warnings
+from sklearn.feature_extraction.text import TfidfVectorizer
 warnings.filterwarnings("ignore")
 
 # =============================================================================
@@ -61,4 +65,28 @@ print('-------------------------------------------------------------------------
 df = df_after
 print('Dados depois das adaptações')
 print(df.head(5))
+print('=============================================================================')
+
+df = organize_rating.organize_rating(df)
+
+# =============================================================================
+# Pré-processamento do corpus
+# =============================================================================
+print_topic.init('Pré-processamento do corpus (lemmatization)...')
+dp = format_comments.DataPreparation()
+corpus = dp.lemmatize(df['review_text'])
+print_topic.finish_default()
+
+# =============================================================================
+# Vetorização TF-IDF
+# =============================================================================
+print_topic.init('Pré-processamento do corpus (Vetorização TF-IDF)...')
+
+vectorizer = TfidfVectorizer(min_df=0., max_df=1., strip_accents='unicode', use_idf=True)
+feature_vectors = vectorizer.fit_transform(corpus).toarray()
+model_lexicon = vectorizer.get_feature_names_out()
+feature_df = pd.DataFrame(feature_vectors, columns= model_lexicon).transpose()
+
+print_topic.finish_variation()
+print(feature_df)
 print('=============================================================================')
