@@ -4,15 +4,18 @@ utils_path = os.path.dirname(os.path.realpath(__file__)) + '\\utils'
 sys.path.insert(0, utils_path)
 pipeline_path = os.path.dirname(os.path.realpath(__file__)) + '\\pipeline'
 sys.path.insert(0, pipeline_path)
+storage_path = os.path.dirname(os.path.realpath(__file__)) + '\\storage'
+sys.path.insert(0, storage_path)
 
 import print_topic
 import organize_rating
 import format_comments
+import storage
 import pandas as pd
 pd.set_option('max_colwidth', 400)
 import numpy as np
 import re
-from unidecode import unidecode
+# from unidecode import unidecode
 import spacy
 import nltk
 import  warnings
@@ -86,6 +89,8 @@ vectorizer = TfidfVectorizer(min_df=0., max_df=1., strip_accents='unicode', use_
 feature_vectors = vectorizer.fit_transform(corpus).toarray()
 model_lexicon = vectorizer.get_feature_names_out()
 feature_df = pd.DataFrame(feature_vectors, columns= model_lexicon).transpose()
+
+storage.insert(model_lexicon)
 
 print_topic.finish_variation()
 print(feature_df)
