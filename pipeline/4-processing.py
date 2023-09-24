@@ -1,0 +1,70 @@
+# =============================================================================
+# Processamento dos dados
+# =============================================================================
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import NMF
+import os
+import sys
+utils_path = os.getcwd() + '\\utils'
+sys.path.insert(0, utils_path)
+
+import format_comments
+import show_topics
+
+
+def processing(df):
+  # Lematização
+  print('- Lematização...')
+  dp = format_comments.DataPreparation()
+  corpus = dp.lemmatize(df['review_text'])
+  print('✅ Lematização concluída ')
+
+  # Vetorização TF-IDF
+  print('- Vetorização TF-IDF...')
+  vectorizer = TfidfVectorizer(min_df=2, max_df=0.75, analyzer='word',
+                              strip_accents='unicode', use_idf=True,
+                              ngram_range=(1,2), max_features=10000)
+  feature_vectors = vectorizer.fit_transform(corpus).toarray()
+  print('✅ Vetorização TF-IDF concluída')
+
+  # Non-Negative Matrix Factorization (NMF)
+  print('- Non-Negative Matrix Factorization (NMF)...')
+  num_topics = 7
+  nmf = NMF(n_components=num_topics, random_state=42, l1_ratio=0.5, init='nndsvdar')
+  nmf.fit(feature_vectors)
+  nmf_weights = nmf.components_
+  nmf_feature_names = vectorizer.get_feature_names_out()
+  print('✅ Non-Negative Matrix Factorization (NMF) concluída')
+
+
+  print('-----------------------------------------------------------------------------')
+  print('Tópicos e suas 5 principais palavras')
+  topics = show_topics.get_topics_terms_weights(nmf_weights, nmf_feature_names)
+  show_topics.print_topics_udf(topics, total_topics=num_topics, num_terms=5)
+  print('-----------------------------------------------------------------------------')
+
+  # Transformação e inserção dos tópicos no Dataset
+  print('- Transformação e inserção dos tópicos no Dataset...')
+  topic_values = nmf.transform(feature_vectors)
+  df['topic'] = topic_values.argmax(axis=1)
+
+  labels = { 
+      0:'Qualidade', 
+      1:'Recebimento', 
+      2:'Entrega', 
+      3:'Entrega', 
+      4:'Expectativa',
+      5:'Outros', 
+      6:'Satisfação geral', 
+      7:'Custo-benefício',
+      8:'Recomendação',
+      9:'Entrega'
+  }
+
+  df = df.replace(labels)
+  print('✅ Transformação e inserção dos tópicos no Dataset concluída')
+
+  return df
+
+
