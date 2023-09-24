@@ -2,6 +2,7 @@ import os
 import sys
 pipeline_path = os.path.dirname(os.path.realpath(__file__)) + '\\pipeline'
 sys.path.insert(0, pipeline_path)
+
 import pipeline
 
 # Acessando os dados disponibilizados
