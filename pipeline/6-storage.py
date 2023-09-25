@@ -13,14 +13,7 @@ dados_pln = db['processed_text']
 def insert(data):
     dados_pln.drop()
 
-    # batch = 1000
-       
-    # for documents in range(0, len(data), batch):
-    #     batch_data = data[documents:documents+batch].to_dict(orient='records')
-    #     dados_pln.insert_many(batch_data)
-
-    df = pd.DataFrame(data)#data is a ndarray we need to transform in dataframe
-
+    df = pd.DataFrame(data)
 
     if not df.empty:#needs to check if the df is empty
         df.columns = df.columns.astype(str)#Mongo only accepts strings

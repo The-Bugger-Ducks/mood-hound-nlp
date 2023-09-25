@@ -9,6 +9,7 @@ access = __import__('1-access_data')
 clear = __import__('2-clear_data')
 select = __import__('3-select_data')
 processing_data = __import__('4-processing')
+store = __import__('6-storage')
 show = __import__('5-show_results')
 
 # =============================================================================
@@ -51,10 +52,18 @@ def processing(df):
 
   return df
 
+
+# =============================================================================
+# Armazenamento dos dados
+# =============================================================================
+def storage_data(df):
+  print_topic.init('Armazenando os dados...')
+  store.insert(df)
+  print_topic.finish_default()
+
+
 # =============================================================================
 # Visualização dos resultados
 # =============================================================================
 def show_results(df):
-  df = show.show_results(df)
-
-  return df
+  show.show_results(df)
