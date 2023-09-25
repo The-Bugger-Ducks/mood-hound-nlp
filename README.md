@@ -1,4 +1,4 @@
-<h1 align="center">Processamento de Linguagem Natural para Mood Hound</h1>
+![mood hound header nlp](https://github.com/The-Bugger-Ducks/mood-hound-nlp/assets/79321198/dbc87ae2-7b71-4aa8-8a63-f4075d5e036d)
 
 Este projeto permite a leitura, processamento e análise dos dados disponibilizados [aqui](https://github.com/americanas-tech/b2w-reviews01), aplicando classificação de temas e análise de sentimento em cima deles. Tem por objetivo auxiliar o desenvolvimento do projeto "MoodHound" (mais informações vide [este link](https://github.com/The-Bugger-Ducks/mood-hound-documentation)).
 
