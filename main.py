@@ -18,4 +18,8 @@ results = pipeline.select_data(results)
 results = pipeline.processing(results)
 
 # Visualização dos resultados
-results = pipeline.show_results(results)
+pipeline.show_results(results)
+
+# Armazenamento dos dados
+results = pipeline.storage_data(results)
+
