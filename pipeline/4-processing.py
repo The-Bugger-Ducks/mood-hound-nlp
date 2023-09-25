@@ -17,7 +17,7 @@ def processing(df):
   # Lematização
   print('- Lematização...')
   dp = format_comments.DataPreparation()
-  corpus = dp.lemmatize(df['review_text'])
+  corpus = dp.lemmatize(df['text'])
   print('✅ Lematização concluída ')
 
   # Vetorização TF-IDF
