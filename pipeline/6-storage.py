@@ -3,12 +3,12 @@ from datetime import datetime
 import pandas as pd
 
 # Conectar ao banco de dados MongoDB
-client = pymongo.MongoClient('URL DO CLUSTER')  
-db = client['pln']
+client = pymongo.MongoClient('mongodb://localhost:27017/')  
+db = client['mood_hound']
 
 # Coleção para dados de PLN
 global dados_pln
-dados_pln = db['processed_text']
+dados_pln = db['comments']
 
 def insert(data):
     dados_pln.drop()
@@ -23,6 +23,6 @@ def insert(data):
     # Fechar a conexão com o MongoDB
     client.close()
 
-    return print(f"{len(documents)} documentos inseridos na coleção 'processed_text' com sucesso.")
+    return print(f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso.")
 
 

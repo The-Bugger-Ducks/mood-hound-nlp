@@ -50,16 +50,16 @@ def processing(df):
   df['topic'] = topic_values.argmax(axis=1)
 
   labels = { 
-      0:'Qualidade', 
-      1:'Recebimento', 
-      2:'Entrega', 
-      3:'Entrega', 
-      4:'Expectativa',
-      5:'Outros', 
-      6:'Satisfação geral', 
-      7:'Custo-benefício',
-      8:'Recomendação',
-      9:'Entrega'
+      0:'QUALITY', 
+      1:'RECEIVEMENT', 
+      2:'DELIVERY', 
+      3:'DELIVERY', 
+      4:'EXPECTATION',
+      5:'OTHERS', 
+      6:'SATISFIED', 
+      7:'COSTBENEFIT',
+      8:'RECOMMENDATION',
+      9:'DELIVERY'
   }
 
   df = df.replace(labels)

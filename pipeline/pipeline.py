@@ -1,6 +1,6 @@
 import os
 import sys
-utils_path = os.getcwd() + '\\utils'
+utils_path = os.getcwd() + '/utils'
 sys.path.insert(0, utils_path)
 
 import print_topic
