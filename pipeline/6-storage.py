@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 
 # Conectar ao banco de dados MongoDB
-client = pymongo.MongoClient('mongodb://localhost:27017/')  
+client = pymongo.MongoClient('mongodbURL')  
 db = client['mood_hound']
 
 # Coleção para dados de PLN

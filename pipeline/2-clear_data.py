@@ -7,6 +7,7 @@ from datetime import datetime
 def clear_data(df): 
   df_after = df
   df_after.rename(columns = {'overall_rating': 'sentiment','submission_date':'created_at','review_text':'text'}, inplace=True)
+  df_after['processed_at'] = datetime.now()
   df_after = df_after[~df_after['text'].isna()].reset_index(drop=True)
   df_after = df_after[df_after['text'].str.contains("\w")]
   df_after = df_after[df_after['text'].str.len() > 3]
