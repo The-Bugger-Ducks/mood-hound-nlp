@@ -11,18 +11,16 @@ global dados_pln
 dados_pln = db['comments']
 
 def insert(data):
-    dados_pln.drop()
+  dados_pln.drop()
 
-    df = pd.DataFrame(data)
+  df = pd.DataFrame(data)
 
-    if not df.empty:#needs to check if the df is empty
-        df.columns = df.columns.astype(str)#Mongo only accepts strings
-        documents = df.to_dict('records')#transform df in dictionary 
-        dados_pln.insert_many(documents)
+  if not df.empty: # needs to check if the df is empty
+    df.columns = df.columns.astype(str) # Mongo only accepts strings
+    documents = df.to_dict('records') # transform df in dictionary 
+    dados_pln.insert_many(documents)
 
     # Fechar a conexão com o MongoDB
     client.close()
 
     return print(f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso.")
-
-
