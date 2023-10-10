@@ -3,6 +3,11 @@
 # =============================================================================
 import pandas as pd
 import numpy as np
+import os
+import sys
+utils_path = os.getcwd() + '/utils'
+sys.path.insert(0, utils_path)
+import random_select
 
 def select_data(df):
   positive = df[df['sentiment'] >= 4] # 4 e 5 "estrelas"
