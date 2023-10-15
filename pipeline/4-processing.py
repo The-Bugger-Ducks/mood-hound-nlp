@@ -12,7 +12,6 @@ sys.path.insert(0, utils_path)
 import format_comments
 import show_topics
 
-
 def processing(df):
   # Lematização
   print('- Lematização...')
@@ -36,7 +35,6 @@ def processing(df):
   nmf_weights = nmf.components_
   nmf_feature_names = vectorizer.get_feature_names_out()
   print('✅ Non-Negative Matrix Factorization (NMF) concluída')
-
 
   print('-----------------------------------------------------------------------------')
   print('Tópicos e suas 5 principais palavras')
