@@ -15,12 +15,18 @@ def select_data(df):
   negative = df[df['sentiment'] <= 2] # 1 e 2 "estrelas"
 
   df = pd.concat([positive, neutral, negative])
-  ratings_maping = {5: 'POSITIVE', 4: 'POSITIVE', 3: 'NEUTRAL', 2: 'NEGATIVE', 1: 'NEGATIVE'}
+  ratings_maping = {
+    5: 'POSITIVO', 
+    4: 'POSITIVO', 
+    3: 'NEUTRO', 
+    2: 'NEGATIVO', 
+    1: 'NEGATIVO'
+  }
   df = df.replace(ratings_maping)
 
-  positive = random_select.select(100, df, 'POSITIVE', 15000)
-  neutral = random_select.select(100, df, 'NEUTRAL', 15000)
-  negative = random_select.select(100, df, 'NEGATIVE', 15000)
+  positive = random_select.select(100, df, 'POSITIVO', 15000)
+  neutral = random_select.select(100, df, 'NEUTRO', 15000)
+  negative = random_select.select(100, df, 'NEGATIVO', 15000)
   select = np.concatenate([positive, neutral, negative])
 
   df = df[df['text'].isin(select)].reset_index(drop=True)
@@ -32,9 +38,9 @@ def select_data(df):
   return df
 
 def select_training_data(df):
-  positive = random_select.select(21, df, 'POSITIVE', 60)
-  neutral = random_select.select(21, df, 'NEUTRAL', 10)
-  negative = random_select.select(21, df, 'NEGATIVE', 30)
+  positive = random_select.select(21, df, 'POSITIVO', 60)
+  neutral = random_select.select(21, df, 'NEUTRO', 10)
+  negative = random_select.select(21, df, 'NEGATIVO', 30)
   select = np.concatenate([positive, neutral, negative])
 
   df = df[df['text'].isin(select)].reset_index(drop=True)
