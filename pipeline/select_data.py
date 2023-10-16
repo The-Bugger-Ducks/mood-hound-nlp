@@ -1,5 +1,5 @@
 # =============================================================================
-# Organizando avaliações pelo grau de classificação (positiva, neutra ou negativa)
+# Organizando avaliações pelo grau de classificação (positiva ou negativa)
 # =============================================================================
 import pandas as pd
 import numpy as np

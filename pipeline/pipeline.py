@@ -5,13 +5,13 @@ sys.path.insert(0, utils_path)
 
 import print_topic
 
-access = __import__('1-access_data')
-clear = __import__('2-clear_data')
-select = __import__('3-select_data')
-training_model = __import__('3-training_model')
-processing_data = __import__('4-processing')
-store = __import__('6-storage')
-show = __import__('5-show_results')
+access = __import__('access_data')
+clear = __import__('clear_data')
+select = __import__('select_data')
+training_model = __import__('training_model')
+processing_data = __import__('processing')
+store = __import__('storage')
+show = __import__('show_results')
 
 # =============================================================================
 # Acessando os dados disponibilizados
@@ -52,7 +52,7 @@ def select_data(df):
   df = select.select_data(df)
   classified_reviews = training_model.select_data()
   separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, False)
-  training_model.classification_model(separated_reviews['training_data'], df)
+  df = training_model.classification_model(separated_reviews['training_data'], df)
   print_topic.finish_default()
 
   return df

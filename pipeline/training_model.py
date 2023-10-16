@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
-select = __import__('3-select_data')
+select = __import__('select_data')
 
 # =============================================================================
 # Organização dos dados
