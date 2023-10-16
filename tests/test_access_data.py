@@ -10,8 +10,7 @@ sys.path.insert(0, project_root)
 import pipeline.access_data as access
 
 class TestDataAcess(unittest.TestCase):
-  
-  def acess_data_test(self):
+  def test_acess_data(self):
     try:
       data = access.access_data()
     except Exception as e:
