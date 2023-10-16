@@ -34,9 +34,9 @@ class TestDataSelect(unittest.TestCase):
     self.assertTrue('topic' in df_test.columns)
 
     topicts = set([
-            'QUALITY', 'RECEIVEMENT', 'DELIVERY', 'EXPECTATION', 
-            'SATISFIED', 'COSTBENEFIT', 'RECOMMENDATION'])
-
+            'QUALIDADE', 'RECEBIMENTO', 'ENTREGA', 'EXPECTATIVA', 
+            'SATISFAÇÃO', 'CUSTO BENEFÍCIO', 'RECOMENDAÇÃO'])
+    
     self.assertTrue(all(label in topicts for label in df_test['topic']))
 
 if __name__ == '__main__':

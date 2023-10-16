@@ -48,22 +48,19 @@ def processing(df, num_topics_default=7):
   df['topic'] = topic_values.argmax(axis=1)
 
   labels = { 
-      0:'QUALITY', 
-      1:'RECEIVEMENT', 
-      2:'DELIVERY', 
-      3:'DELIVERY', 
-      4:'EXPECTATION',
-      5:'OTHERS', 
-      6:'SATISFIED', 
-      7:'COSTBENEFIT',
-      8:'RECOMMENDATION',
-      9:'DELIVERY'
+      0:'QUALIDADE', 
+      1:'RECEBIMENTO', 
+      2:'ENTREGA', 
+      3:'ENTREGA', 
+      4:'EXPECTATIVA',
+      5:'OUTROS', 
+      6:'SATISFAÇÃO', 
+      7:'CUSTO BENEFÍCIO',
+      8:'RECOMENDAÇÃO',
+      9:'ENTREGA'
   }
 
   df = df.replace(labels)
   print('Transformação e inserção dos tópicos no Dataset concluída')
 
   return df
-
-
-

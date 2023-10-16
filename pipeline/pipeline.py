@@ -34,13 +34,25 @@ def clear_data(df):
   return df
 
 # =============================================================================
-# Selecionando as avaliações pelo sentimento (positivo, neutro ou negativo)
+# Treinando o modelo de análise de sentimento
+# =============================================================================
+def training_classification_model():
+  print_topic.init('Treinando o modelo de análise de sentimento...')
+  classified_reviews = training_model.select_data()
+  separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, True)
+  training_model.training(separated_reviews['training_data'],separated_reviews['testing_data'])
+  training_model.get_accuracy_and_precision(separated_reviews['training_data'],separated_reviews['testing_data'])
+  print_topic.finish_default()
+
+# =============================================================================
+# Selecionando e classificando o sentimento (positivo ou negativo)
 # =============================================================================
 def select_data(df):
-  print_topic.init('Selecionando as avaliações pelo sentimento (positivo, neutro ou negativo)...')
+  print_topic.init('Selecionando e classificando o sentimento (positivo ou negativo)...')
   df = select.select_data(df)
-  print_topic.init('Treinando o modelo de classificação...')
-  training_model.training(df)
+  classified_reviews = training_model.select_data()
+  separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, False)
+  training_model.classification_model(separated_reviews['training_data'], df)
   print_topic.finish_default()
 
   return df
