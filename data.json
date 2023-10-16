@@ -1,11 +1,11 @@
 [
   {
     "text": "produto muito bom so achei a letra umpouco pequena",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "Não é simples de instalar no carro! Para fechar o cinto é necessário puxar todo o tecido que fica no engate para baixo. Produto confortável mas de difícil manuseio.",
-    "sentiment": "Neutro"
+    "sentiment": "Negativo"
   },
   {
     "text": "Ola fiz um pedido de um radio mp3, mais um auto falante bravox de 5 polegadas mais um de 6 polegadas da pionner. O site alega que ja entregou mais falta o da pionner",
@@ -21,7 +21,7 @@
   },
   {
     "text": "Estes copos sao de diamante e ouro? Ja foi vendido algum?",
-    "sentiment": "Neutro"
+    "sentiment": "Negativo"
   },
   {
     "text": "Produto de acordo com as minhas expectativas. Além da entrega perfeita, antes do previsto. Sempre faço ótimas compras com as Lojas Americanas. Recomendo.",
@@ -109,15 +109,15 @@
   },
   {
     "text": "Apenas configurar ela corretamente para aproveitar o máximo da TV!",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "nao consta a gramatura das folhas.  achei bom que tem foto das folhas internas e na descrição fala q nao sao decoradas",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "Olá a Geladeira?, está fazendo com que fique agua nos pratos e nas embalagens plásticas?, o barulho estava um pouco forte, mas melhorou agora?, gostaria de saber porque desta agua nos pratos e embalagens?",
-    "sentiment": "Neutro"
+    "sentiment": "Negativo"
   },
   {
     "text": "Produto acima da minha expectativa. Me surpreendeu . muito satisfeita . indico a todos. Além da entrega ter sido muito rápida.",
@@ -129,15 +129,15 @@
   },
   {
     "text": "ótimo produto recomendo! mas a entrega atrasou pelo fato de ter sido feriado no ultimo dia!",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "o cabide é bonito, bem slim, segura bastante a roupa, porem solta muito pelo, provavelmente a vida útil dele vai ser pequena",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "O produto é bom mais poderia ser mais em conta o preço pelo material do produto compraria mais, so que nao pelo esse preço.",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "Produto muito bom, tenho há dois anos e até agora não tive problema nenhum, a pulseira está nova ainda, a caixa está um pouco riscada, mas é pelo uso constante mesmo, afinal uso direto.",
@@ -157,7 +157,7 @@
   },
   {
     "text": "Só vou usar no meu novo apartamento. Que vai demorar um pouco.",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "Produto  otimo, atendeu minha expectativa,  a entrega foi maravilhosa, bem  antes do prazo",
@@ -265,7 +265,7 @@
   },
   {
     "text": "Uma pena q meu cartão não tenha esse limite. Tava doido por esta capinha.",
-    "sentiment": "Neutro"
+    "sentiment": "Negativo"
   },
   {
     "text": "PÉSSIMO SERVIÇO, QUANDO EU RECEBER O PRODUTO TALVEZ POSSA AVALIAR REALMENTE.",
@@ -289,7 +289,7 @@
   },
   {
     "text": "Recomendo. Recomendo tambem adquirir garantia extendida, visto que li muitos relatos de defeitos futuros.",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "Eu não recebi o produto! Passou o prazo da entrega e a Americanas me informou que a pessoa que iria enviar não havia enviando. E então eu cancelei a compra! E gostaria do estorno!",
@@ -341,7 +341,7 @@
   },
   {
     "text": "Se quiser  arriscar, compre SEGURO adicional de, no mínimo, 3 anos para ter cobertura de 4 anos. Depois de 4 anos, provavelmente você não vai conseguir consertar a máquina de fazer gelo, caso ela estrague (ELA VAI ESTRAGAR) mas o refrigerador deverá continuar funcionando. NÃO COMPRE SEM SEGURO, pois o defeito geralmente ocorre poucas semanas após  vencer  a garantia de fábrica. ALÔ Brastemp, melhorem esta maquininha de 5ª categoria.",
-    "sentiment": "Neutro"
+    "sentiment": "Negativo"
   },
   {
     "text": "O kit foi entregue dentro do prazo, mas deixa muito a desejar. Além de simples, o tecido é fino e pouco macio. Pelo valor, eu esperava mais qualidade.",
@@ -365,7 +365,7 @@
   },
   {
     "text": "Produto bom, do um pouco forte o cheiro da tinta mas de resto tudo bem",
-    "sentiment": "Neutro"
+    "sentiment": "Positivo"
   },
   {
     "text": "Produto chegou certinho ,boa qualidade e atendimento.",
@@ -377,7 +377,7 @@
   },
   {
     "text": "achei a história muito extensa. No meu caso, que minha filha tem 2 anos, ela não tem paciência para contar até no final. E ela fala que o lagarto é um jacaré! rs",
-    "sentiment": "Neutro"
+    "sentiment": "Negativo"
   },
   {
     "text": "Utilizei o produto é depois de algumas horas o celular desliga, mesmo com carga na bateria. Após recarregar, acontece novamente o problema. Não indico",
@@ -399,4 +399,4 @@
     "text": "É muito pesado, o fio é pequeno. Realmente é um produto muito ruim, e pior é super caro",
     "sentiment": "Negativo"
   }
- ]
+]
