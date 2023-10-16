@@ -7,10 +7,7 @@ def show_results(df):
   print("Distribuição geral do corpus:\n", df['topic'].value_counts(normalize=True))
 
   # Distribuição de avaliações negativas
-  print("\nDistribuição das avaliações Negativas:\n", df['topic'][df['sentiment'] == 'NEGATIVO'].value_counts(normalize=True))
-
-  # Distribuição de avaliações neutras
-  print("\nDistribuição das avaliações Neutras:\n", df['topic'][df['sentiment'] == 'NEUTRO'].value_counts(normalize=True))
+  # print("\nDistribuição das avaliações Negativas:\n", df['topic'][df['sentiment'] == 'NEGATIVO'].value_counts(normalize=True))
 
   # Distribuição de avaliações positivas
-  print("\nDistribuição das avaliações Positivas:\n", df['topic'][df['sentiment'] == 'POSITIVO'].value_counts(normalize=True))
+  # print("\nDistribuição das avaliações Positivas:\n", df['topic'][df['sentiment'] == 'POSITIVO'].value_counts(normalize=True))
