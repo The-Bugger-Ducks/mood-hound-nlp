@@ -18,11 +18,11 @@ results = pipeline.clear_data(results)
 results = pipeline.select_data(results)
 
 # Processamento dos dados
-# results = pipeline.processing(results)
+results = pipeline.processing(results)
 
 # Visualização dos resultados
-# pipeline.show_results(results)
+pipeline.show_results(results)
 
 # Armazenamento dos dados
-# results = pipeline.storage_data(results)
+results = pipeline.storage_data(results)
 

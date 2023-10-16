@@ -52,7 +52,7 @@ def select_data(df):
   df = select.select_data(df)
   classified_reviews = training_model.select_data()
   separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, False)
-  training_model.classification_model(separated_reviews['training_data'], df)
+  df = training_model.classification_model(separated_reviews['training_data'], df)
   print_topic.finish_default()
 
   return df

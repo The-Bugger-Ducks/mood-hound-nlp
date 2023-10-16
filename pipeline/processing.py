@@ -30,6 +30,7 @@ def processing(df, num_topics_default=7):
   # Non-Negative Matrix Factorization (NMF)
   print('- Non-Negative Matrix Factorization (NMF)...')
   num_topics = num_topics_default
+
   nmf = NMF(n_components=num_topics, random_state=42, l1_ratio=0.5, init='nndsvdar')
   nmf.fit(feature_vectors)
   nmf_weights = nmf.components_
