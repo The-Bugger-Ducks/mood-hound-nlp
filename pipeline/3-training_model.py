@@ -37,10 +37,13 @@ def separate_training_and_testing_data(classified_reviews, isTraining):
       else:
           negative_reviews.append(classified_review)
 
-  positive_training = positive_reviews[:int((0.2 * len(positive_reviews)))]
-  negative_training = negative_reviews[:int((0.2 * len(negative_reviews)))]
+  positive_training = positive_reviews
+  negative_training = negative_reviews
 
   if isTraining:
+    positive_training = positive_reviews[:int((0.2 * len(positive_reviews)))]
+    negative_training = negative_reviews[:int((0.2 * len(negative_reviews)))]
+
     print('-----------------------------------------------------------------------------')
     print('POSITIVO - Total:', len(positive_reviews),'| Quantidade treino (20%):', len(positive_training))
     print('NEGATIVO - Total:', len(negative_reviews),'| Quantidade treino (20%):', len(negative_training))
@@ -49,6 +52,7 @@ def separate_training_and_testing_data(classified_reviews, isTraining):
   testing_data = positive_reviews[int((0.2 * len(positive_reviews))):] + negative_reviews[int((0.2 * len(negative_reviews))):]
 
   return {'testing_data': testing_data,'training_data': training_data}
+
 
 # =============================================================================
 # Funções do modelo
