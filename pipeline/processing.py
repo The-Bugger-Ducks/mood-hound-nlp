@@ -12,13 +12,12 @@ sys.path.insert(0, utils_path)
 import format_comments
 import show_topics
 
-
-def processing(df):
+def processing(df, num_topics_default=7):
   # Lematização
   print('- Lematização...')
   dp = format_comments.DataPreparation()
   corpus = dp.lemmatize(df['text'])
-  print('✅ Lematização concluída ')
+  print('Lematização concluída ')
 
   # Vetorização TF-IDF
   print('- Vetorização TF-IDF...')
@@ -26,17 +25,17 @@ def processing(df):
                               strip_accents='unicode', use_idf=True,
                               ngram_range=(1,2), max_features=10000)
   feature_vectors = vectorizer.fit_transform(corpus).toarray()
-  print('✅ Vetorização TF-IDF concluída')
+  print('Vetorização TF-IDF concluída')
 
   # Non-Negative Matrix Factorization (NMF)
   print('- Non-Negative Matrix Factorization (NMF)...')
-  num_topics = 7
+  num_topics = num_topics_default
+
   nmf = NMF(n_components=num_topics, random_state=42, l1_ratio=0.5, init='nndsvdar')
   nmf.fit(feature_vectors)
   nmf_weights = nmf.components_
   nmf_feature_names = vectorizer.get_feature_names_out()
-  print('✅ Non-Negative Matrix Factorization (NMF) concluída')
-
+  print('Non-Negative Matrix Factorization (NMF) concluída')
 
   print('-----------------------------------------------------------------------------')
   print('Tópicos e suas 5 principais palavras')
@@ -50,21 +49,19 @@ def processing(df):
   df['topic'] = topic_values.argmax(axis=1)
 
   labels = { 
-      0:'Qualidade', 
-      1:'Recebimento', 
-      2:'Entrega', 
-      3:'Entrega', 
-      4:'Expectativa',
-      5:'Outros', 
-      6:'Satisfação geral', 
-      7:'Custo-benefício',
-      8:'Recomendação',
-      9:'Entrega'
+      0:'QUALIDADE', 
+      1:'RECEBIMENTO', 
+      2:'ENTREGA', 
+      3:'ENTREGA', 
+      4:'EXPECTATIVA',
+      5:'OUTROS', 
+      6:'SATISFAÇÃO', 
+      7:'CUSTO BENEFÍCIO',
+      8:'RECOMENDAÇÃO',
+      9:'ENTREGA'
   }
 
   df = df.replace(labels)
-  print('✅ Transformação e inserção dos tópicos no Dataset concluída')
+  print('Transformação e inserção dos tópicos no Dataset concluída')
 
   return df
-
-
