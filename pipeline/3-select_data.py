@@ -18,7 +18,7 @@ def select_data(df):
   df = df.sample(frac=1).reset_index(drop=True)
 
   print('-----------------------------------------------------------------------------')
-  print(df['stars'].value_counts(normalize=True))
+  print(df['sentiment'].value_counts(normalize=True))
 
   return df
 
@@ -31,6 +31,6 @@ def select_training_data(df):
   df = df.sample(frac=1).reset_index(drop=True)
 
   print('-----------------------------------------------------------------------------')
-  print(df['stars'].value_counts(normalize=True))
+  print(df['sentiment'].value_counts(normalize=True))
 
   return df

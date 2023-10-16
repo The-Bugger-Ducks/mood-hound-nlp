@@ -24,5 +24,5 @@ results = pipeline.processing(results)
 pipeline.show_results(results)
 
 # Armazenamento dos dados
-# results = pipeline.storage_data(results)
+results = pipeline.storage_data(results)
 
