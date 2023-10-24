@@ -1,9 +1,9 @@
 from pymongo import MongoClient
 import pandas as pd
 
-def insert(data, client = MongoClient('mongoDatabaseURL') ):
+def insert(data, default_client = MongoClient('mongoDatabaseURL') ):
   # Conectar ao banco de dados MongoDB
-  client = client
+  client = default_client
 
   # Coleção para dados de PLN
   db = client['mood_hound']
