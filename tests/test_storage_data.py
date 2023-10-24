@@ -11,8 +11,8 @@ sys.path.insert(0, project_root)
 import pipeline.storage as store
 
 #Banco para testes unitários
-global client
-client = MongoClient('mongodb+srv://joao:Mck9WH61qPA40dZe@clusterpln.n768zhk.mongodb.net/') 
+global test_client
+test_client = MongoClient('mongodb+srv://joao:Mck9WH61qPA40dZe@clusterpln.n768zhk.mongodb.net/') 
 
 
 class TestStoreData(unittest.TestCase):
@@ -26,13 +26,13 @@ class TestStoreData(unittest.TestCase):
       ]
     }
     df = pd.DataFrame(data)
-    result = store.insert(df, client)
+    result = store.insert(df, test_client)
 
     self.assertEqual(result, "3 documentos inseridos na coleção 'comments' com sucesso.")
 
   def test_insert_with_empty_data(self):
     data = []  
-    result = store.insert(data, client)
+    result = store.insert(data, test_client)
     self.assertEqual(result, "Nenhum documento inserido na coleção 'comments'.")
 
 if __name__ == '__main__':
