@@ -1,15 +1,14 @@
 from pymongo import MongoClient
 import pandas as pd
 
-# Conectar ao banco de dados MongoDB
-client = MongoClient('mongoDatabaseURL')  
-db = client['mood_hound']
+def insert(data, client = MongoClient('mongoDatabaseURL') ):
+  # Conectar ao banco de dados MongoDB
+  client = client
 
-# Coleção para dados de PLN
-global dados_pln
-dados_pln = db['comments']
-
-def insert(data):
+  # Coleção para dados de PLN
+  db = client['mood_hound']
+  dados_pln = db['comments']
+  
   dados_pln.drop()
 
   df = pd.DataFrame(data)
