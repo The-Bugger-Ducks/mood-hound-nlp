@@ -65,3 +65,6 @@ def processing(df, num_topics_default=7):
   print('Transformação e inserção dos tópicos no Dataset concluída')
 
   return df
+
+
+

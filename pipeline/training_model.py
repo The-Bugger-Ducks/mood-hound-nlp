@@ -4,6 +4,8 @@
 import pandas as pd
 import numpy as np
 import json
+import os
+import sys
 from sklearn.neighbors  import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
@@ -12,7 +14,9 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
-select = __import__('select_data')
+from datetime import datetime
+
+from storage import insert_stats
 
 # =============================================================================
 # Organização dos dados
@@ -25,6 +29,8 @@ def select_data():
       classified_reviews.append({ 'text': classified_review['text'], 'sentiment': classified_review['sentiment'].upper(), 'predict': '', 'feature_vector': [] })
 
   return classified_reviews
+
+
 
 def separate_training_and_testing_data(classified_reviews, isTraining):
   # Organização dos dados de treino e teste para inserir no algoritmo
@@ -146,11 +152,37 @@ def get_accuracy_and_precision(mannual_classification, model_classification):
 
   print('-----------------------------------------------------------------------------')
   print('Matriz de confusão')
-  print(pd.crosstab(
+
+  confusion_matrix = pd.crosstab(
         unclassified_reviews_mannual,
         unclassified_reviews_model, 
         rownames=['Manual'], 
-        colnames=['Predito']))
+        colnames=['Predito'])
+  
+  print(confusion_matrix)
+  
+  # Salvar dados
+
+  confusion_matrix_dict = {
+     "verdadeiro_positivo": int(confusion_matrix.at['POSITIVO', 'POSITIVO']),
+     "falso_positivo": int(confusion_matrix.at['NEGATIVO', 'POSITIVO']),
+     "falso_negativo": int(confusion_matrix.at['POSITIVO', 'NEGATIVO']),
+     "verdadeiro_negativo": int(confusion_matrix.at['NEGATIVO', 'NEGATIVO']),
+    }
+  
+  
+
+  stats_data = {
+     'model_accuracy':float(acuracia),
+     'model_precision':float(precision),
+     'confusion_matrix':[confusion_matrix_dict],
+     'created_at':datetime.now()
+  }
+
+  insert_stats(stats_data)  
+  
+
+
 
 # =============================================================================
 # Aplicação do modelo
@@ -187,3 +219,5 @@ def classification_model(training_data, data):
   data = data.drop(columns=['feature_vector'])
 
   return data
+
+
