@@ -2,7 +2,8 @@ from pymongo import MongoClient
 import pandas as pd
 
 # Conectar ao banco de dados MongoDB
-client = MongoClient('mongodb+srv://joao:Mck9WH61qPA40dZe@clusterpln.n768zhk.mongodb.net/')  
+client = MongoClient('mongoDatabaseURL')  
+
 db = client['mood_hound']
 
 # Coleção para dados de PLN
