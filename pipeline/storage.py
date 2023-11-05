@@ -1,8 +1,12 @@
 from pymongo import MongoClient
 import pandas as pd
 import os
+from dotenv import load_dotenv
 
-url_test = os.environ.get('MONGODB_URL')
+
+load_dotenv()
+
+url_test = os.environ.get('MONGO_DB_TEST')
 
 if url_test is None:
     raise ValueError("A variável de ambiente MONGO_DB_TEST não foi configurada.")
