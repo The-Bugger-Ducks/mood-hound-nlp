@@ -1,8 +1,14 @@
 from pymongo import MongoClient
 import pandas as pd
+import os
+
+url_test = os.environ.get('MONGODB_URL')
+
+if url_test is None:
+    raise ValueError("A variável de ambiente MONGO_DB_TEST não foi configurada.")
 
 # Conectar ao banco de dados MongoDB
-client = MongoClient('mongoDatabaseURL')  
+client = MongoClient(url_test)  
 
 db = client['mood_hound']
 

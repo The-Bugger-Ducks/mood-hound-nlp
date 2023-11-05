@@ -24,9 +24,12 @@ jobs:
 
       - name: Run tests
         run: python main_tests.py
+        env:
+          MONGO_DB_TEST: ${{ secrets.MONGO_DB_TEST }}
              
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
