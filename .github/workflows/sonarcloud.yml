@@ -24,7 +24,7 @@ jobs:
 
       - name: Config environment variables
         env:
-          MONGODB_URL: ${{ secrets.MONGO_DB_TEST }}
+          MONGO_DB_TEST: ${{ secrets.MONGO_DB_TEST }}
         run: |
           echo "MONGO_DB_TEST=$MONGO_DB_TEST" >> $GITHUB_ENV
 
