@@ -19,9 +19,7 @@ def clear_data(df):
       'site_category_lv1', 
       'site_category_lv2', 
       'review_title',
-      'recommend_to_a_friend',
-      'reviewer_birth_year',
-      'reviewer_gender'])
+      'recommend_to_a_friend'])
   
   analysis_table = {
       'Formato do dataset': [df.shape, df_after.shape], 
