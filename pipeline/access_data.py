@@ -8,5 +8,3 @@ def access_data():
   df = pd.read_csv(url, sep = ',',low_memory=False)
   
   return df
-
-

@@ -85,7 +85,6 @@ def update_data(df):
   print_topic.init('Armazenando tempo de execução...')
   store.update_stats(df)
   print_topic.finish_default()
-
 # =============================================================================
 # Visualização dos resultados
 # =============================================================================

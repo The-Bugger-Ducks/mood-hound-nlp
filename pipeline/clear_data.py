@@ -20,6 +20,7 @@ def clear_data(df):
       'site_category_lv2', 
       'review_title',
       'recommend_to_a_friend'])
+
   
   analysis_table = {
       'Formato do dataset': [df.shape, df_after.shape], 
@@ -34,5 +35,3 @@ def clear_data(df):
   print(analysis_table)
 
   return df_after
-
-
