@@ -10,8 +10,8 @@ from utils.show_topics import get_topics_terms_weights
 
 class TestGetTopicsTermsWeights(unittest.TestCase):
   def test_get_topics_terms_weights(self):
-      weights = np.array([[float(0.2), float(0.1), float(0.5), float(0.3)],
-                          [float(0.3), float(0.2), float(0.4), float(0.1)]])
+      weights = np.array([[0.2, 0.1, 0.5, 0.3],
+                          [0.3, 0.2, 0.4, 0.1]])
       feature_names = ['word1', 'word2', 'word3', 'word4']
 
       
