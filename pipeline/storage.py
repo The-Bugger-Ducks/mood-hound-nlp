@@ -48,8 +48,6 @@ def insert_stats(data):
   else:
     return "Nenhum documento inserido na coleção 'comments'."
 
-
-
 def update_stats(time):
   data_exist = stats_pln.find_one({})
   if data_exist:
