@@ -6,11 +6,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 import os
 import sys
-utils_path = os.getcwd() + '\\utils'
-sys.path.insert(0, utils_path)
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
 
-import format_comments
-import show_topics
+import utils.format_comments as format_comments
+import utils.show_topics as show_topics
 
 def processing(df, num_topics_default=7):
   # Lematização
