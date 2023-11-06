@@ -3,7 +3,6 @@ import sys
 utils_path = os.getcwd() + '/utils'
 sys.path.insert(0, utils_path)
 
-
 import print_topic
 
 access = __import__('access_data')
@@ -85,7 +84,6 @@ def update_data(df):
   print_topic.init('Armazenando tempo de execução...')
   store.update_stats(df)
   print_topic.finish_default()
-
 # =============================================================================
 # Visualização dos resultados
 # =============================================================================

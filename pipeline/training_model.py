@@ -4,8 +4,6 @@
 import pandas as pd
 import numpy as np
 import json
-import os
-import sys
 from sklearn.neighbors  import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
@@ -15,8 +13,9 @@ plt.style.use('fivethirtyeight')
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from datetime import datetime
-
 from storage import insert_stats
+
+select = __import__('select_data')
 
 # =============================================================================
 # Organização dos dados
@@ -29,8 +28,6 @@ def select_data():
       classified_reviews.append({ 'text': classified_review['text'], 'sentiment': classified_review['sentiment'].upper(), 'predict': '', 'feature_vector': [] })
 
   return classified_reviews
-
-
 
 def separate_training_and_testing_data(classified_reviews, isTraining):
   # Organização dos dados de treino e teste para inserir no algoritmo
@@ -152,7 +149,6 @@ def get_accuracy_and_precision(mannual_classification, model_classification):
 
   print('-----------------------------------------------------------------------------')
   print('Matriz de confusão')
-
   confusion_matrix = pd.crosstab(
         unclassified_reviews_mannual,
         unclassified_reviews_model, 
@@ -181,9 +177,6 @@ def get_accuracy_and_precision(mannual_classification, model_classification):
 
   insert_stats(stats_data)  
   
-
-
-
 # =============================================================================
 # Aplicação do modelo
 def classification_model(training_data, data):
@@ -219,5 +212,3 @@ def classification_model(training_data, data):
   data = data.drop(columns=['feature_vector'])
 
   return data
-
-
