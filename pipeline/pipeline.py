@@ -16,6 +16,7 @@ show = __import__('show_results')
 # =============================================================================
 # Acessando os dados disponibilizados
 # =============================================================================
+
 def access_data():
   print_topic.init('Acessando os dados disponibilizados...')
   df = access.access_data()
@@ -26,6 +27,7 @@ def access_data():
 # =============================================================================
 # Análise exploratória e adaptações
 # =============================================================================
+
 def clear_data(df):
   print_topic.init('Análise exploratória e adaptações...')
   df = clear.clear_data(df)
@@ -47,6 +49,7 @@ def training_classification_model():
 # =============================================================================
 # Selecionando e classificando o sentimento (positivo ou negativo)
 # =============================================================================
+
 def select_data(df):
   print_topic.init('Selecionando e classificando o sentimento (positivo ou negativo)...')
   df = select.select_data(df)
@@ -60,6 +63,7 @@ def select_data(df):
 # =============================================================================
 # Processamento dos dados
 # =============================================================================
+
 def processing(df):
   print_topic.init('Processamento dos dados...')
   df = processing_data.processing(df)
@@ -70,11 +74,16 @@ def processing(df):
 # =============================================================================
 # Armazenamento dos dados
 # =============================================================================
+
 def storage_data(df):
   print_topic.init('Armazenando os dados...')
   store.insert(df)
   print_topic.finish_default()
 
+def update_data(df):
+  print_topic.init('Armazenando tempo de execução...')
+  store.update_stats(df)
+  print_topic.finish_default()
 # =============================================================================
 # Visualização dos resultados
 # =============================================================================

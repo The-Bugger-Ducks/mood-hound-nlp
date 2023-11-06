@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
+from datetime import datetime
+from storage import insert_stats
+
 select = __import__('select_data')
 
 # =============================================================================
@@ -146,12 +149,34 @@ def get_accuracy_and_precision(mannual_classification, model_classification):
 
   print('-----------------------------------------------------------------------------')
   print('Matriz de confusão')
-  print(pd.crosstab(
+  confusion_matrix = pd.crosstab(
         unclassified_reviews_mannual,
         unclassified_reviews_model, 
         rownames=['Manual'], 
-        colnames=['Predito']))
+        colnames=['Predito'])
+  
+  print(confusion_matrix)
+  
+  # Salvar dados
 
+  confusion_matrix_dict = {
+     "verdadeiro_positivo": int(confusion_matrix.at['POSITIVO', 'POSITIVO']),
+     "falso_positivo": int(confusion_matrix.at['NEGATIVO', 'POSITIVO']),
+     "falso_negativo": int(confusion_matrix.at['POSITIVO', 'NEGATIVO']),
+     "verdadeiro_negativo": int(confusion_matrix.at['NEGATIVO', 'NEGATIVO']),
+    }
+  
+  
+
+  stats_data = {
+     'model_accuracy':float(acuracia),
+     'model_precision':float(precision),
+     'confusion_matrix':[confusion_matrix_dict],
+     'created_at':datetime.now()
+  }
+
+  insert_stats(stats_data)  
+  
 # =============================================================================
 # Aplicação do modelo
 def classification_model(training_data, data):

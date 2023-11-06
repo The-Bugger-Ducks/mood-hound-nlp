@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# para teste mude para MONGO_DB_TEST
+# Para teste mude para MONGO_DB_TEST
 url_test = os.environ.get('MONGO_DB_PROD')
 
 if url_test is None:
@@ -19,6 +19,7 @@ db = client['mood_hound']
 # Coleção para dados de PLN
 global dados_pln
 dados_pln = db['comments']
+stats_pln = db['stats']
 
 def insert(data):
   dados_pln.drop()
@@ -30,9 +31,25 @@ def insert(data):
     documents = df.to_dict('records')
     dados_pln.insert_many(documents)
 
-    # Fechar a conexão com o MongoDB
-    client.close()
+    return f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso."
+  else:
+    return "Nenhum documento inserido na coleção 'comments'."
+  
+def insert_stats(data):
+  df = pd.DataFrame(data)
+
+  if not df.empty: 
+    df.columns = df.columns.astype(str) 
+    documents = df.to_dict('records')
+    stats_pln.insert_many(documents)
+    
 
     return f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso."
   else:
     return "Nenhum documento inserido na coleção 'comments'."
+
+def update_stats(time):
+  data_exist = stats_pln.find_one({})
+  if data_exist:
+    stats_pln.update_one({'_id': data_exist['_id']}, {'$set': {'execution_time':time}})
+    return 'Informação atualizada'
