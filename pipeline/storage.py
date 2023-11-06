@@ -3,7 +3,6 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 url_test = os.environ.get('MONGO_DB_TEST')
