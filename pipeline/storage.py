@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url_test = os.environ.get('MONGO_DB_TEST')
+# para teste mude para MONGO_DB_TEST
+url_test = os.environ.get('MONGO_DB_PROD')
 
 if url_test is None:
     raise ValueError("A variável de ambiente MONGO_DB_TEST não foi configurada.")
