@@ -1,9 +1,18 @@
 from pymongo import MongoClient
 import pandas as pd
-import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+url_test = os.environ.get('MONGO_DB_TEST')
+
+if url_test is None:
+    raise ValueError("A variável de ambiente MONGO_DB_TEST não foi configurada.")
 
 # Conectar ao banco de dados MongoDB
-client = MongoClient('mongodb+srv://joao:Mck9WH61qPA40dZe@clusterpln.n768zhk.mongodb.net/')  
+client = MongoClient(url_test)  
+
 db = client['mood_hound']
 
 # Coleção para dados de PLN
