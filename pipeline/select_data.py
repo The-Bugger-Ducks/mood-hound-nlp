@@ -10,27 +10,27 @@ sys.path.insert(0, utils_path)
 import random_select
 
 def select_data(df):
-  positive = random_select.select(100, df, 'POSITIVO', 3000)
-  negative = random_select.select(100, df, 'NEGATIVO', 3000)
-  select = np.concatenate([positive, negative])
+  positive = random_select.select(100, df, 'POSITIVO', 100)
+  neutral = random_select.select(100, df, 'NEUTRO', 100)
+  negative = random_select.select(100, df, 'NEGATIVO', 100)
+  select = np.concatenate([positive, neutral, negative])
 
   df = df[df['text'].isin(select)].reset_index(drop=True)
   df = df.sample(frac=1).reset_index(drop=True)
 
-  print('-----------------------------------------------------------------------------')
-  print(df['sentiment'].value_counts(normalize=True))
+  # print('-----------------------------------------------------------------------------')
+  # print(df['stars'].value_counts(normalize=True))
 
   return df
 
-def select_training_data(df):
-  positive = random_select.select(21, df, 'POSITIVO', 60)
-  negative = random_select.select(21, df, 'NEGATIVO', 40)
-  select = np.concatenate([positive, negative])
 
+def select_training_data(df):
+  positive = random_select.select(100, df, 'POSITIVO', 15)
+  neutral = random_select.select(100, df, 'NEUTRO', 45)
+  negative = random_select.select(100, df, 'NEGATIVO', 20)
+
+  select = np.concatenate([positive, neutral, negative])
   df = df[df['text'].isin(select)].reset_index(drop=True)
   df = df.sample(frac=1).reset_index(drop=True)
-
-  print('-----------------------------------------------------------------------------')
-  print(df['sentiment'].value_counts(normalize=True))
 
   return df

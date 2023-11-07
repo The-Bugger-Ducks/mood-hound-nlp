@@ -12,10 +12,7 @@ results = pipeline.access_data()
 results = pipeline.clear_data(results)
 
 # Treinando modelo de análise de sentimento
-# pipeline.training_classification_model()
-
-# Selecionando dados a serem utilizados na classificação
-results = pipeline.select_data(results)
+# pipeline.training_classification_model(results)
 
 # Processamento dos dados
 results = pipeline.processing(results)
@@ -24,5 +21,5 @@ results = pipeline.processing(results)
 pipeline.show_results(results)
 
 # Armazenamento dos dados
-results = pipeline.storage_data(results)
+# results = pipeline.storage_data(results)
 
