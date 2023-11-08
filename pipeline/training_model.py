@@ -8,6 +8,9 @@ from gensim.models.phrases import Phrases, Phraser
 from gensim.models import word2vec
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, precision_score
+from datetime import datetime
+from storage import insert_stats
+
 select = __import__('select_data')
 
 import os
@@ -50,7 +53,6 @@ def use_word2vec(corpus):
   sentences = [line.split() for line in corpus]
   w2v_model = word2vec.Word2Vec(sentences, vector_size=5, window=2, 
                                 min_count=1, sample=1e-3, epochs=50)
-  #w2v_model.build_vocab(sentences)
 
   return w2v_model
 
@@ -146,8 +148,23 @@ def training(df):
   df_matrix = pd.DataFrame(data, columns=['Manual','Predito'])
   print(pd.crosstab(df_matrix['Manual'], df_matrix['Predito'], rownames=['Manual'], colnames=['Predito']))
 
-  return { 'acc_test_score': acc_test_score,'pre_test_score': pre_test_score }
-
+  confusion_matrix = pd.crosstab(y_test, w2v_predict, rownames=['Manual'], colnames=['Predito'])
+    
+  # Salvar dados
+  confusion_matrix_dict = {
+    "verdadeiro_positivo": int(confusion_matrix.at['POSITIVO', 'POSITIVO']),
+    "falso_positivo": int(confusion_matrix.at['NEGATIVO', 'POSITIVO']),
+    "falso_negativo": int(confusion_matrix.at['POSITIVO', 'NEGATIVO']),
+    "verdadeiro_negativo": int(confusion_matrix.at['NEGATIVO', 'NEGATIVO']),
+  }
+  stats_data = {
+    'model_accuracy': float(acc_test_score),
+    'model_precision': float(pre_test_score),
+    'confusion_matrix': [confusion_matrix_dict],
+    'created_at': datetime.now()
+  }
+  insert_stats(stats_data)
+  
 
 # =============================================================================
 # Aplicação do modelo
