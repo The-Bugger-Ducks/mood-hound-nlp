@@ -14,11 +14,8 @@ def pipe():
   # Análise exploratória e adaptações
   results = pipeline.clear_data(results)
 
-  # Treinando modelo de análise de sentimento
-  #pipeline.training_classification_model()
-
-  # Selecionando dados a serem utilizados na classificação
-  results = pipeline.select_data(results)
+# Treinando modelo de análise de sentimento
+# pipeline.training_classification_model(results)
 
   # Processamento dos dados
   results = pipeline.processing(results)
