@@ -47,13 +47,10 @@ def select_data(df):
 # Criação do modelo
 # =============================================================================
 def use_word2vec(corpus):
-  words = [line.split() for line in corpus]
-  phrases = Phrases(words, min_count=1, threshold=2, progress_per=1000) 
-  bigram = Phraser(phrases)
-  sentences = bigram[words]
-
-  w2v_model = word2vec.Word2Vec(vector_size=5,window=2,min_count=1,sample=1e-3,epochs=50)
-  w2v_model.build_vocab(sentences)
+  sentences = [line.split() for line in corpus]
+  w2v_model = word2vec.Word2Vec(sentences, vector_size=5, window=2, 
+                                min_count=1, sample=1e-3, epochs=50)
+  #w2v_model.build_vocab(sentences)
 
   return w2v_model
 
@@ -155,54 +152,39 @@ def training(df):
 # =============================================================================
 # Aplicação do modelo
 def classification_model(data):
-  print('antes')
-  print(data.shape)
   df = select_data(data)
-  print('depois - df')
-  print(df.shape)
   comparison_data = separate_training_and_testing_data(df.to_dict("records"))
   train_data = pd.DataFrame(comparison_data['training_data'])
 
   base_model_lexicon = []
 
-  print('data[corpus]')
-  print(data['corpus'])
-  print('train_data[corpus]')
-  print(train_data['corpus'])
-  # for hehe in data.iterrows():
-  #   if 'rapir' in hehe[1]['corpus']: print('rapir ', hehe[1]['corpus'])
   w2v_model = use_word2vec(data['corpus'])
 
-  if 'rapir' in w2v_model.wv: print('rapir w2v_model')
-  # for word_vec in w2v_model.wv.key_to_index.keys():
-  #   print('w2v_model word', word_vec)
-  
   doc_embeddings_train = []
   for row in train_data.iterrows():
     sentence = row[1]['corpus'].split()
     result = []
-    for word in sentence:
+    if len(sentence) > 0:
+      for word in sentence:
         result.append(w2v_model.wv[word])
-    result = np.mean(np.array(result),axis=0)
-    doc_embeddings_train.append(result)
+      result = np.mean(np.array(result),axis=0)
+      doc_embeddings_train.append(result)
+    else:
+      train_data.drop(row[0], inplace=True)
   
   w2v_train_df = pd.DataFrame(np.array(doc_embeddings_train))
 
-  doc_embeddings = []  
-  for row, index in data.iterrows():
+  doc_embeddings = []
+  for row in data.iterrows():
     sentence = row[1]['corpus'].split()
     result = []
-    # tem_mais_de_um = False
-    for word in sentence:
-      result.append(w2v_model.wv[word])
-        
-    if len(result) > 0: 
-      print(index)
+    if len(sentence) > 0:
+      for word in sentence:
+        result.append(w2v_model.wv[word])
       result = np.mean(np.array(result),axis=0)
-    else: 
-      print('deu ruim')
-      result = np.zeros(100)
-    doc_embeddings.append(result)
+      doc_embeddings.append(result)
+    else:
+      data.drop(row[0], inplace=True)
 
   w2v_df = pd.DataFrame(np.array(doc_embeddings))
 
