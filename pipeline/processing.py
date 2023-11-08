@@ -29,7 +29,6 @@ def processing(df, num_topics_default=7):
   print('-----------------------------------------------------------------------------')
   print('- Análise de sentimentos...')
   df = training_model.classification_model(df)
-  print(df)
   print('Análise de sentimentos concluída')
 
   # Non-Negative Matrix Factorization (NMF)
@@ -38,7 +37,7 @@ def processing(df, num_topics_default=7):
   vectorizer = TfidfVectorizer(min_df=2, max_df=0.75, analyzer='word',
                               strip_accents='unicode', use_idf=True,
                               ngram_range=(1,2), max_features=10000)
-  feature_vectors = vectorizer.fit_transform(corpus).toarray()
+  feature_vectors = vectorizer.fit_transform([line for line in df['corpus']]).toarray()
   num_topics = num_topics_default
 
   nmf = NMF(n_components=num_topics, random_state=42, l1_ratio=0.5, init='nndsvdar')
