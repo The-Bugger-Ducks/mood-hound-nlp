@@ -21,7 +21,6 @@ def print_topics_udf(topics, total_topics=1, weight_threshold=0.0001, display_we
         topic = topics[index]
         topic = [(term, float(wt))
                  for term, wt in topic]
-        #print(topic)
         topic = [(word, round(wt,2)) 
                  for word, wt in topic 
                  if abs(wt) >= weight_threshold]

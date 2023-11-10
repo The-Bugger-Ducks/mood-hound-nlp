@@ -23,6 +23,7 @@ def access_data():
 
   return df
 
+
 # =============================================================================
 # Análise exploratória e adaptações
 # =============================================================================
@@ -33,39 +34,27 @@ def clear_data(df):
 
   return df
 
+
 # =============================================================================
 # Treinando o modelo de análise de sentimento
 # =============================================================================
-def training_classification_model():
+def training_classification_model(df):
   print_topic.init('Treinando o modelo de análise de sentimento...')
-  classified_reviews = training_model.select_data()
-  separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, True)
-  training_model.training(separated_reviews['training_data'],separated_reviews['testing_data'])
-  training_model.get_accuracy_and_precision(separated_reviews['training_data'],separated_reviews['testing_data'])
+  training_model.training(df)
   print_topic.finish_default()
 
-# =============================================================================
-# Selecionando e classificando o sentimento (positivo ou negativo)
-# =============================================================================
-def select_data(df):
-  print_topic.init('Selecionando e classificando o sentimento (positivo ou negativo)...')
-  df = select.select_data(df)
-  classified_reviews = training_model.select_data()
-  separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, False)
-  df = training_model.classification_model(separated_reviews['training_data'], df)
-  print_topic.finish_default()
-
-  return df
 
 # =============================================================================
 # Processamento dos dados
 # =============================================================================
 def processing(df):
   print_topic.init('Processamento dos dados...')
+  df = select.select_data(df)
   df = processing_data.processing(df)
   print_topic.finish_default()
 
   return df
+
 
 # =============================================================================
 # Armazenamento dos dados
@@ -74,6 +63,12 @@ def storage_data(df):
   print_topic.init('Armazenando os dados...')
   store.insert(df)
   print_topic.finish_default()
+
+def update_data(df):
+  print_topic.init('Armazenando tempo de execução...')
+  store.update_stats(df)
+  print_topic.finish_default()
+
 
 # =============================================================================
 # Visualização dos resultados
