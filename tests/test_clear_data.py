@@ -37,7 +37,7 @@ class TestClearData(unittest.TestCase):
     self.mock()
     df = clear.clear_data(self.df)
 
-    self.assertTrue('sentiment' in df.columns)
+    self.assertTrue('stars' in df.columns)
     self.assertTrue('created_at' in df.columns)
     self.assertTrue('text' in df.columns)
     self.assertTrue(df['text'].str.contains("\w").sum())

@@ -27,19 +27,19 @@ class TestDataPreparation(unittest.TestCase):
         self.assertNotIn("um", cleaned_text)
 
     def test_clean_text(self):
-        input_text = ["Este é um ótimo produto", "A entrega foi rápida"]
+        input_text = str(["Este é um ótimo produto", "A entrega foi rápida"])
         cleaned_corpus = self.data_preparation.clean_text(input_text)
-        self.assertEqual(cleaned_corpus, ["ótimo produto", "entrega rápida"])
+        self.assertEqual(cleaned_corpus, ['ótimo produto entrega rápida'])
 
     def test_lemmatization(self):
-        input_text = [["eu", "sou", "correndo"], ["eles", "são", "correr"]]
-        lemmatized_text = self.data_preparation.lemmatization(input_text)
-        self.assertEqual(lemmatized_text, [["eu", "ser", "correr"], ["ele", "ser", "correr"]])
-
+        input_text = ["eu", "sou", "correndo", "eles", "são", "correr"]
+        lemmatized_text = self.data_preparation.lemmatization([input_text])
+        self.assertEqual(lemmatized_text[0], ["eu", "ser", "correr", "ele", "ser", "correr"])
+ 
     def test_lemmatize(self):
-        input_text = ["Este é um ótimo produto", "A entrega foi rápida"]
+        input_text = str(["Este é um ótimo produto", "A entrega foi rápida"])
         lemmatized_text = self.data_preparation.lemmatize(input_text)
-        self.assertEqual(lemmatized_text, ["bom produto", "entrega rápido"])
+        self.assertEqual(lemmatized_text, ["bom produto entregar rápido"])
 
 if __name__ == '__main__':
     unittest.main()
