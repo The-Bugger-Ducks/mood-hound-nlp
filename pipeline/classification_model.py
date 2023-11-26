@@ -149,11 +149,18 @@ def separate_training_and_testing_data(df, is_testing=False):
             "-----------------------------------------------------------------------------"
         )
         data = {
-            "POSITIVO": [len(positive_training), len(positive_reviews[5:])],
-            "NEUTRO": [len(neutral_training), len(neutral_reviews[5:])],
-            "NEGATIVO": [len(negative_training), len(negative_reviews[5:])],
+            "Treino": [
+                len(positive_training),
+                len(neutral_training),
+                len(negative_training),
+            ],
+            "Teste": [
+                len(positive_reviews[5:]),
+                len(neutral_reviews[5:]),
+                len(negative_reviews[5:]),
+            ],
         }
-        print(pd.DataFrame(data, columns=["Treino", "Teste"]))
+        print(pd.DataFrame(data, index=["POSITIVO", "NEUTRO", "NEGATIVO"]))
 
     training_data = positive_training + neutral_training + negative_training
     testing_data = positive_reviews[5:] + neutral_reviews[5:] + negative_reviews[5:]
