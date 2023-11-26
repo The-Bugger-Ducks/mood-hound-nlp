@@ -1,18 +1,21 @@
-import calculate_time
+from utils.calculate_time import init, finish, get
 
-def init(topic):
-  print('\n')
-  print('=============================================================================')
-  print(topic)
-  calculate_time.init()
 
-def finish_default():
-  calculate_time.finish()
-  print('-----------------------------------------------------------------------------')
-  print('✅ Concluído com sucesso \n🕛:', calculate_time.get())
-  print('=============================================================================')
+def init_topic(topic):
+    print("\n")
+    print(
+        "============================================================================="
+    )
+    print(topic)
+    init()
 
-def finish_variation():
-  calculate_time.finish()
-  print('-----------------------------------------------------------------------------')
-  print('✅ Concluído com sucesso \n🕛:', calculate_time.get())
+
+def finish_topic_default():
+    finish()
+    print(
+        "-----------------------------------------------------------------------------"
+    )
+    print("✅ Concluído com sucesso \n🕛", get())
+    print(
+        "============================================================================="
+    )
