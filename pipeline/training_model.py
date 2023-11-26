@@ -10,6 +10,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, precision_score
 from datetime import datetime
 from storage import insert_stats
+from storage import update_stats
+
 
 select = __import__('select_data')
 
@@ -148,22 +150,12 @@ def training(df):
   df_matrix = pd.DataFrame(data, columns=['Manual','Predito'])
   print(pd.crosstab(df_matrix['Manual'], df_matrix['Predito'], rownames=['Manual'], colnames=['Predito']))
 
-  confusion_matrix = pd.crosstab(y_test, w2v_predict, rownames=['Manual'], colnames=['Predito'])
-    
-  # Salvar dados
-  confusion_matrix_dict = {
-    "verdadeiro_positivo": int(confusion_matrix.at['POSITIVO', 'POSITIVO']),
-    "falso_positivo": int(confusion_matrix.at['NEGATIVO', 'POSITIVO']),
-    "falso_negativo": int(confusion_matrix.at['POSITIVO', 'NEGATIVO']),
-    "verdadeiro_negativo": int(confusion_matrix.at['NEGATIVO', 'NEGATIVO']),
-  }
   stats_data = {
     'model_accuracy': float(acc_test_score),
     'model_precision': float(pre_test_score),
-    'confusion_matrix': [confusion_matrix_dict],
     'created_at': datetime.now()
   }
-  insert_stats(stats_data)
+  update_stats(stats_data)
   
 
 # =============================================================================
@@ -177,6 +169,7 @@ def classification_model(data):
 
   w2v_model = use_word2vec(data['corpus'])
 
+  only_stop_count = 0
   doc_embeddings_train = []
   for row in train_data.iterrows():
     sentence = row[1]['corpus'].split()
@@ -187,11 +180,17 @@ def classification_model(data):
       result = np.mean(np.array(result),axis=0)
       doc_embeddings_train.append(result)
     else:
+      only_stop_count=+1
       train_data.drop(row[0], inplace=True)
-  
+
+  stats_data = {'reviews_with_only_stop_words': int(only_stop_count)}
+  update_stats(stats_data)
+
+
   w2v_train_df = pd.DataFrame(np.array(doc_embeddings_train))
 
   doc_embeddings = []
+  only_stop_count2 = 0
   for row in data.iterrows():
     sentence = row[1]['corpus'].split()
     result = []
@@ -201,7 +200,10 @@ def classification_model(data):
       result = np.mean(np.array(result),axis=0)
       doc_embeddings.append(result)
     else:
+      only_stop_count2+=1
       data.drop(row[0], inplace=True)
+  stats_data = {'reviews_with_only_stop_words': int(only_stop_count2)}
+  update_stats(stats_data)
 
   w2v_df = pd.DataFrame(np.array(doc_embeddings))
 

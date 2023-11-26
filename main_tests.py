@@ -22,10 +22,3 @@ cov.stop()
 cov.report()
 
 cov.xml_report(outfile='coverage.xml')
-
-
-
-
-
-
-
