@@ -22,6 +22,7 @@ def topic_model(data, num_topics_default):
 
     nmf = NMF(n_components=num_topics, random_state=42, l1_ratio=0.5, init="nndsvdar")
     nmf.fit(feature_vectors)
+    print("Non-Negative Matrix Factorization (NMF) concluída")
 
     # Transformação e inserção dos tópicos no Dataset
     print("- Transformação e inserção dos tópicos no Dataset...")

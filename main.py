@@ -4,7 +4,7 @@ import datetime
 from pipeline.pipeline import (
     step1_access_data,
     step2_pre_processing,
-    step_extra_testing_classification_model,
+    step3_processing,
 )
 
 
@@ -16,10 +16,10 @@ def pipe():
     results = step2_pre_processing(results)
 
     # Treinando modelo de análise de sentimento
-    step_extra_testing_classification_model(results)
+    # step_extra_testing_classification_model(results)
 
     # Processamento dos dados
-    # results = processing(results)
+    results = step3_processing(results)
 
     # Armazenamento dos dados
     # results = storage_data(results)

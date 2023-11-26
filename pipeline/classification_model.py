@@ -148,30 +148,12 @@ def separate_training_and_testing_data(df, is_testing=False):
         print(
             "-----------------------------------------------------------------------------"
         )
-        print(
-            "POSITIVO:",
-            len(positive_reviews),
-            "| Treino:",
-            len(positive_training),
-            "| Teste:",
-            len(positive_reviews[5:]),
-        )
-        print(
-            "NEUTRO:",
-            len(neutral_reviews),
-            "  | Treino:",
-            len(neutral_training),
-            "| Teste:",
-            len(neutral_reviews[5:]),
-        )
-        print(
-            "NEGATIVO:",
-            len(negative_reviews),
-            "| Treino:",
-            len(negative_training),
-            "| Teste:",
-            len(negative_reviews[5:]),
-        )
+        data = {
+            "POSITIVO": [len(positive_training), len(positive_reviews[5:])],
+            "NEUTRO": [len(neutral_training), len(neutral_reviews[5:])],
+            "NEGATIVO": [len(negative_training), len(negative_reviews[5:])],
+        }
+        print(pd.DataFrame(data, columns=["Treino", "Teste"]))
 
     training_data = positive_training + neutral_training + negative_training
     testing_data = positive_reviews[5:] + neutral_reviews[5:] + negative_reviews[5:]
@@ -183,9 +165,9 @@ def separate_training_and_testing_data(df, is_testing=False):
 # Treinamento do modelo
 # =============================================================================
 def training_model(data, is_testing=False):
-    data = select_mock_data(data)
+    df = select_mock_data(data)
     comparison_data = separate_training_and_testing_data(
-        data.to_dict("records"), is_testing
+        df.to_dict("records"), is_testing
     )
     train_data = pd.DataFrame(comparison_data["training_data"])
 
@@ -204,6 +186,7 @@ def training_model(data, is_testing=False):
             result = np.mean(np.array(result), axis=0)
             doc_embeddings_train.append(result)
         else:
+            train_data.drop(row[0], inplace=True)
             data.drop(row[0], inplace=True)
 
     w2v_train_df = pd.DataFrame(np.array(doc_embeddings_train))
