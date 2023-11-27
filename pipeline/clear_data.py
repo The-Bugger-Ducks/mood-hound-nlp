@@ -1,10 +1,9 @@
+import pandas as pd
+
+
 # =============================================================================
 # Análise exploratória e adaptações
 # =============================================================================
-import pandas as pd
-from datetime import datetime
-
-
 def clear_data(df):
     before_format = df.shape
     before_null = df["review_text"].isnull().sum()
