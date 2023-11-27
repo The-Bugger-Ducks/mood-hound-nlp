@@ -48,10 +48,10 @@ def insert_stats(data):
         stats_pln.insert_many(documents)
 
         return (
-            f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso."
+            f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso."
         )
     else:
-        return "Nenhum documento inserido na coleção 'comments'."
+        return "Nenhum documento inserido na coleção 'stats'."
 
 
 def update_stats(time):
