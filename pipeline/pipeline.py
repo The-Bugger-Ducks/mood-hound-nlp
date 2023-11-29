@@ -84,4 +84,3 @@ def step5_update_data(df):
     exec_time = finish_topic_default()
 
     update_stats({"metrics": {"stage":"Atualizando métricas", "day": datetime.now(), "time":exec_time}})
-
