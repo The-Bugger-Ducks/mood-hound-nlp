@@ -1,5 +1,5 @@
 from timeit import timeit
-import datetime
+from datetime import datetime
 
 from pipeline.pipeline import (
     step1_access_data,
