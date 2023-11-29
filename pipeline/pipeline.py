@@ -10,6 +10,7 @@ from utils.print_topic import init_topic, finish_topic_default
 from datetime import datetime
 
 
+
 # =============================================================================
 # Acessando os dados disponibilizados
 # =============================================================================
@@ -50,7 +51,6 @@ def step_extra_testing_classification_model(df):
     update_stats({"metrics": {"stage": "Treinamento do modelo", "day": datetime.now(), "time": exec_time}})
 
 
-
 # =============================================================================
 # Processamento dos dados
 # =============================================================================
@@ -61,7 +61,6 @@ def step3_processing(df):
     exec_time = finish_topic_default()
 
     update_stats({"metrics": {"stage": "Processamento de dados", "day": datetime.now(), "time": exec_time}})
-
 
     return df
 
