@@ -21,6 +21,4 @@ def processing(data, num_topics_default=7):
     print("- Non-Negative Matrix Factorization (NMF)...")
     data = topic_model(data, num_topics_default)
 
-    print(data.head())
-
     return data

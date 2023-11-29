@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import gc
 from gensim.models import word2vec
 from sklearn.neural_network import MLPClassifier
 
@@ -116,6 +117,9 @@ def select_mock_data(df):
     df = df[df["text"].isin(selected)].reset_index(drop=True)
     df = df.sample(frac=1).reset_index(drop=True)
 
+    del positive, neutral, negative, select, corpus
+    gc.collect()
+
     return df
 
 
@@ -198,12 +202,17 @@ def training_model(data, is_testing=False):
 
     w2v_train_df = pd.DataFrame(np.array(doc_embeddings_train))
 
-    return {
+    model_data = {
         "train_data": train_data,
         "w2v_model": w2v_model,
         "w2v_train_df": w2v_train_df,
         "test_data": pd.DataFrame(comparison_data["testing_data"]),
     }
+
+    del comparison_data, sentences, doc_embeddings_train, w2v_train_df, w2v_model
+    gc.collect()
+
+    return model_data
 
 
 # =============================================================================
@@ -235,5 +244,8 @@ def classification_model(data):
     w2v_predict = mlp.predict(w2v_df)
 
     data["sentiment"] = w2v_predict
+
+    del doc_embeddings, w2v_df, y_train, mlp, w2v_predict
+    gc.collect()
 
     return data

@@ -1,3 +1,4 @@
+import gc
 from utils.format_comments import DataPreparation
 
 
@@ -13,6 +14,10 @@ def pre_processing(df):
         result = dp.lemmatize(review)
         corpus.append(result[0])
     df["corpus"] = corpus
+
+    del corpus, dp
+    gc.collect()
+
     print("Limpeza dos dados e lematização concluída ")
 
     return df

@@ -1,4 +1,5 @@
 import numpy as np
+import gc
 
 from utils.random_select import random_select
 
@@ -14,5 +15,8 @@ def select_data(df):
 
     df = df[df["text"].isin(select)].reset_index(drop=True)
     df = df.sample(frac=1).reset_index(drop=True)
+
+    del positive, neutral, negative, select
+    gc.collect()
 
     return df

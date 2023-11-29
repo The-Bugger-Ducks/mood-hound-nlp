@@ -19,7 +19,7 @@ def pipe():
     results = step2_pre_processing(results)
 
     # Treinando modelo de análise de sentimento
-    step_extra_testing_classification_model(results)
+    # step_extra_testing_classification_model(results)
 
     # Processamento dos dados
     results = step3_processing(results)
