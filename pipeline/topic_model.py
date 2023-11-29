@@ -28,7 +28,7 @@ def topic_model(data, num_topics_default):
         )
         nmf.fit(feature_vectors)
         print("Non-Negative Matrix Factorization (NMF) concluída")
-        
+
     except np.core._exceptions._ArrayMemoryError as e:
         memory_error = {
             "erros": {
@@ -39,7 +39,7 @@ def topic_model(data, num_topics_default):
                 }
             }
         }
-    update_stats(memory_error)
+        update_stats(memory_error)
 
     # Transformação e inserção dos tópicos no Dataset
     print("- Transformação e inserção dos tópicos no Dataset...")
