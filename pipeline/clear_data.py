@@ -1,7 +1,6 @@
 import pandas as pd
 from pipeline.storage import update_stats, insert_stats
 
-
 # =============================================================================
 # Análise exploratória e adaptações
 # =============================================================================

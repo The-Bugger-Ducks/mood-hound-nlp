@@ -3,7 +3,6 @@ from sklearn.decomposition import NMF
 import numpy as np
 from pipeline.storage import update_stats
 
-
 # =============================================================================
 # Criando e treinando o modelo
 # =============================================================================
@@ -39,7 +38,7 @@ def topic_model(data, num_topics_default):
                 }
             }
         }
-    update_stats(memory_error)
+        update_stats(memory_error)
 
     # Transformação e inserção dos tópicos no Dataset
     print("- Transformação e inserção dos tópicos no Dataset...")

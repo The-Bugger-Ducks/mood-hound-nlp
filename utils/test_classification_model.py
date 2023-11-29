@@ -7,7 +7,6 @@ from datetime import datetime
 from pipeline.classification_model import training_model
 from pipeline.storage import update_stats
 
-
 # =============================================================================
 # Teste do modelo
 # =============================================================================

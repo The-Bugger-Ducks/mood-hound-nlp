@@ -2,13 +2,11 @@ import pandas as pd
 import numpy as np
 from gensim.models import word2vec
 from sklearn.neural_network import MLPClassifier
+
 from datetime import datetime
-
-
 from utils.random_select import random_select, random_select_sentiment
 from utils.format_comments import DataPreparation
 from pipeline.storage import update_stats, insert_stats
-
 
 # =============================================================================
 # Organização dos dados
@@ -198,7 +196,6 @@ def training_model(data, is_testing=False):
         else:
             train_data.drop(row[0], inplace=True)
             data.drop(row[0], inplace=True)
-
 
     w2v_train_df = pd.DataFrame(np.array(doc_embeddings_train))
 

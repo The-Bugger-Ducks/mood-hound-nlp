@@ -23,7 +23,6 @@ stats_pln = db["stats"]
 
 current_stats_id = None
 
-
 def insert(data):
     dados_pln.drop()
 
