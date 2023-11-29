@@ -15,7 +15,9 @@ def finish_topic_default():
     print(
         "-----------------------------------------------------------------------------"
     )
-    print("✅ Concluído com sucesso \n🕛", get())
+    execution_time = get()
+    print("✅ Concluído com sucesso \n🕛", execution_time)
     print(
         "============================================================================="
     )
+    return execution_time
