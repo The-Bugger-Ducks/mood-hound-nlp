@@ -3,7 +3,6 @@ from sklearn.decomposition import NMF
 import numpy as np
 from pipeline.storage import update_stats
 
-
 # =============================================================================
 # Criando e treinando o modelo
 # =============================================================================
