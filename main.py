@@ -1,6 +1,5 @@
 from timeit import timeit
-import datetime as date
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from pipeline.pipeline import (
     step1_access_data,
@@ -30,7 +29,8 @@ def pipe():
 
 
 tempo = timeit("pipe()", globals=globals(), number=1)
-format = date.timedelta(seconds=tempo)
-data_format = {"metrics": {"stage": "Pipeline completa", "day": datetime.now(), "time": str(format)}}
+timedelta_time = timedelta(seconds=tempo)
+format = str(timedelta_time)
+data_format = {"metrics": {"stage": "Pipeline completa", "day": datetime.now(), "time": format}}
 
 step5_update_data(str(format))
