@@ -33,4 +33,4 @@ timedelta_time = timedelta(seconds=tempo)
 format = str(timedelta_time)
 data_format = {"metrics": {"stage": "Pipeline completa", "day": datetime.now(), "time": format}}
 
-step5_update_data(str(format))
+step5_update_data(data_format)
