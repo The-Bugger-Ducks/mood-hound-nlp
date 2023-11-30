@@ -48,6 +48,7 @@ def insert_stats(data):
         stats_pln.insert_many(documents)
 
         return (
+
             f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso."
         )
     else:
