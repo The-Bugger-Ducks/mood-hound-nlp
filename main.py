@@ -1,31 +1,33 @@
-import os
-import sys
 from timeit import timeit
 import datetime
-pipeline_path = os.path.dirname(os.path.realpath(__file__)) + '/pipeline'
-sys.path.insert(0, pipeline_path)
 
-import pipeline
+from pipeline.pipeline import (
+    step1_access_data,
+    step2_pre_processing,
+    step3_processing,
+    step4_storage_data,
+    step5_update_data,
+    step_extra_testing_classification_model,
+)
+
 
 def pipe():
-  # Acessando os dados disponibilizados
-  results = pipeline.access_data()
+    # Acessando os dados disponibilizados
+    results = step1_access_data()
 
-  # Análise exploratória e adaptações
-  results = pipeline.clear_data(results)
+    # Análise exploratória e adaptações
+    results = step2_pre_processing(results)
 
-# Treinando modelo de análise de sentimento
-# pipeline.training_classification_model(results)
+    # Treinando modelo de análise de sentimento
+    step_extra_testing_classification_model(results)
 
-  # Processamento dos dados
-  results = pipeline.processing(results)
+    # Processamento dos dados
+    results = step3_processing(results)
 
-  # Visualização dos resultados
-  pipeline.show_results(results)
+    # Armazenamento dos dados
+    results = step4_storage_data(results)
 
-  # Armazenamento dos dados
-  results = pipeline.storage_data(results)
 
-tempo = timeit('pipe()', globals=globals(),number=1)
+tempo = timeit("pipe()", globals=globals(), number=1)
 format = datetime.timedelta(seconds=tempo)
-pipeline.update_data(str(format))
+step5_update_data(str(format))

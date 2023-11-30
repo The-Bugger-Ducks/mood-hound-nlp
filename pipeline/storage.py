@@ -5,51 +5,60 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Para teste mude para MONGO_DB_TEST
-url_test = os.environ.get('MONGO_DB_PROD')
+# Para produção mude para MONGO_DB_PROD
+url_test = os.environ.get("MONGO_DB_TEST")
 
 if url_test is None:
     raise ValueError("A variável de ambiente MONGO_DB_TEST não foi configurada.")
 
 # Conectar ao banco de dados MongoDB
-client = MongoClient(url_test)  
+client = MongoClient(url_test)
 
-db = client['mood_hound']
+db = client["mood_hound"]
 
 # Coleção para dados de PLN
 global dados_pln
-dados_pln = db['comments']
-stats_pln = db['stats']
+dados_pln = db["comments"]
+stats_pln = db["stats"]
+
 
 def insert(data):
-  dados_pln.drop()
+    dados_pln.drop()
 
-  df = pd.DataFrame(data)
+    df = pd.DataFrame(data)
 
-  if not df.empty: 
-    df.columns = df.columns.astype(str) 
-    documents = df.to_dict('records')
-    dados_pln.insert_many(documents)
+    if not df.empty:
+        df.columns = df.columns.astype(str)
+        documents = df.to_dict("records")
+        dados_pln.insert_many(documents)
 
-    return f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso."
-  else:
-    return "Nenhum documento inserido na coleção 'comments'."
-  
+        return (
+            f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso."
+        )
+    else:
+        return "Nenhum documento inserido na coleção 'comments'."
+
+
 def insert_stats(data):
-  df = pd.DataFrame(data)
+    df = pd.DataFrame(data)
 
-  if not df.empty: 
-    df.columns = df.columns.astype(str) 
-    documents = df.to_dict('records')
-    stats_pln.insert_many(documents)
-    
+    if not df.empty:
+        df.columns = df.columns.astype(str)
+        documents = df.to_dict("records")
+        stats_pln.insert_many(documents)
 
-    return f"{len(documents)} documentos inseridos na coleção 'comments' com sucesso."
-  else:
-    return "Nenhum documento inserido na coleção 'comments'."
+        return (
+
+            f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso."
+        )
+    else:
+        return "Nenhum documento inserido na coleção 'stats'."
+
 
 def update_stats(time):
-  data_exist = stats_pln.find_one({})
-  if data_exist:
-    stats_pln.update_one({'_id': data_exist['_id']}, {'$set': {'execution_time':time}})
-    return 'Informação atualizada'
+    data_exist = stats_pln.find_one({})
+    if data_exist:
+        stats_pln.update_one(
+            {"_id": data_exist["_id"]}, {"$set": {"execution_time": time}}
+        )
+        return "Informação atualizada"

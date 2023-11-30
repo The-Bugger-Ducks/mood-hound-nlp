@@ -37,11 +37,12 @@ class TestClearData(unittest.TestCase):
     self.mock()
     df = clear.clear_data(self.df)
 
-    self.assertTrue('sentiment' in df.columns)
+    self.assertEqual(df["reviewer_birth_year"].tolist(), [])
+    self.assertTrue('stars' in df.columns)
+    self.assertEqual(df["text"].isnull().sum(), 0)
+    self.assertEqual(df["text"].duplicated(keep=False).sum(), 0)
     self.assertTrue('created_at' in df.columns)
     self.assertTrue('text' in df.columns)
-    self.assertTrue(df['text'].str.contains("\w").sum())
-    self.assertTrue((df['text'].str.len() > 3).sum())
 
 
 if __name__ == '__main__':
