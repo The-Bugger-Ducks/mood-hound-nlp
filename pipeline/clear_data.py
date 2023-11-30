@@ -1,5 +1,5 @@
 import pandas as pd
-
+from pipeline.storage import update_stats, insert_stats
 
 # =============================================================================
 # Análise exploratória e adaptações
@@ -43,5 +43,29 @@ def clear_data(df):
     analysis_table = pd.DataFrame(analysis_table)
     analysis_table.index = ["Antes das adaptações", "Depois das adaptações"]
     print(analysis_table)
+
+    # Coleta de metricas
+    data_analysis_table = {"metrics": {"total_of_data": int(df.count().sum())}}
+
+    update_stats(data_analysis_table)
+
+    null_avaluations = {
+        "erros": {
+            "value": int(before_null),
+            "type": "null_avaluations",
+        },
+    }
+
+    update_stats(null_avaluations)
+
+
+    duplicated_avaluations = {
+        "erros":{
+            "value": int(before_duplicated),
+            "type": "duplicate_avaluations",
+        },
+    }
+
+    update_stats(duplicated_avaluations)
 
     return df

@@ -21,6 +21,7 @@ global dados_pln
 dados_pln = db["comments"]
 stats_pln = db["stats"]
 
+current_stats_id = None
 
 def insert(data):
     dados_pln.drop()
@@ -40,25 +41,32 @@ def insert(data):
 
 
 def insert_stats(data):
+    global current_stats_id
+
     df = pd.DataFrame(data)
 
     if not df.empty:
         df.columns = df.columns.astype(str)
         documents = df.to_dict("records")
-        stats_pln.insert_many(documents)
 
-        return (
+        result = stats_pln.insert_many(documents)
 
-            f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso."
-        )
+        if result.inserted_ids:
+            current_stats_id = result.inserted_ids[0]
+
+            return (
+                f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso. "
+            )
+        else:
+            return "Erro ao inserir documentos na coleção 'stats'."
     else:
         return "Nenhum documento inserido na coleção 'stats'."
 
 
-def update_stats(time):
-    data_exist = stats_pln.find_one({})
-    if data_exist:
-        stats_pln.update_one(
-            {"_id": data_exist["_id"]}, {"$set": {"execution_time": time}}
-        )
+def update_stats(payload):
+    global current_stats_id
+    if current_stats_id:
+        stats_pln.update_one({"_id": current_stats_id}, {"$push": payload})
         return "Informação atualizada"
+    else:
+        return "Erro: ID do documento não encontrado. Insert_stats não foi executado."

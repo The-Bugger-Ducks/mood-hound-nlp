@@ -5,8 +5,7 @@ from sklearn.metrics import accuracy_score, precision_score
 from datetime import datetime
 
 from pipeline.classification_model import training_model
-from pipeline.storage import insert_stats
-
+from pipeline.storage import update_stats
 
 # =============================================================================
 # Teste do modelo
@@ -60,16 +59,10 @@ def testing(data):
     print(confusion_matrix)
 
     # Salvar dados
-    confusion_matrix_dict = {
-        "verdadeiro_positivo": int(confusion_matrix.at["POSITIVO", "POSITIVO"]),
-        "falso_positivo": int(confusion_matrix.at["NEGATIVO", "POSITIVO"]),
-        "falso_negativo": int(confusion_matrix.at["POSITIVO", "NEGATIVO"]),
-        "verdadeiro_negativo": int(confusion_matrix.at["NEGATIVO", "NEGATIVO"]),
-    }
     stats_data = {
-        "model_accuracy": float(acc_test_score),
-        "model_precision": float(pre_test_score),
-        "confusion_matrix": [confusion_matrix_dict],
-        "created_at": datetime.now(),
+        "metrics": {
+            "model_accuracy": float(acc_test_score),
+            "model_precision": float(pre_test_score),
+        },
     }
-    insert_stats(stats_data)
+    update_stats(stats_data)

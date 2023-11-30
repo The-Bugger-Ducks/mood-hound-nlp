@@ -3,9 +3,10 @@ import numpy as np
 from gensim.models import word2vec
 from sklearn.neural_network import MLPClassifier
 
+from datetime import datetime
 from utils.random_select import random_select, random_select_sentiment
 from utils.format_comments import DataPreparation
-
+from pipeline.storage import update_stats, insert_stats
 
 # =============================================================================
 # Organização dos dados
@@ -213,6 +214,7 @@ def classification_model(data):
     model = training_model(data)
 
     doc_embeddings = []
+    only_stop_count = 0
     for row in data.iterrows():
         sentence = row[1]["corpus"].split()
         result = []
@@ -222,7 +224,11 @@ def classification_model(data):
             result = np.mean(np.array(result), axis=0)
             doc_embeddings.append(result)
         else:
+            only_stop_count+=1
             data.drop(row[0], inplace=True)
+    
+    #Coleta de metricas
+    update_stats({"erros": [{"type": "stop_only_reviews", "day": datetime.now(), "value": int(only_stop_count)}]})
 
     w2v_df = pd.DataFrame(np.array(doc_embeddings))
 
