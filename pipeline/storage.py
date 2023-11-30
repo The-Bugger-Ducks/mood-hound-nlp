@@ -23,6 +23,7 @@ stats_pln = db["stats"]
 
 current_stats_id = None
 
+
 def insert(data):
     dados_pln.drop()
 
@@ -54,9 +55,7 @@ def insert_stats(data):
         if result.inserted_ids:
             current_stats_id = result.inserted_ids[0]
 
-            return (
-                f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso. "
-            )
+            return f"{len(documents)} documentos inseridos na coleção 'stats' com sucesso. "
         else:
             return "Erro ao inserir documentos na coleção 'stats'."
     else:

@@ -31,6 +31,8 @@ def pipe():
 tempo = timeit("pipe()", globals=globals(), number=1)
 timedelta_time = timedelta(seconds=tempo)
 format = str(timedelta_time)
-data_format = {"metrics": {"stage": "Pipeline completa", "day": datetime.now(), "time": format}}
+data_format = {
+    "metrics": {"stage": "Pipeline completa", "day": datetime.now(), "time": format}
+}
 
 step5_update_data(data_format)

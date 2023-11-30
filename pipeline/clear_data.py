@@ -1,6 +1,7 @@
 import pandas as pd
 from pipeline.storage import update_stats, insert_stats
 
+
 # =============================================================================
 # Análise exploratória e adaptações
 # =============================================================================
@@ -58,9 +59,8 @@ def clear_data(df):
 
     update_stats(null_avaluations)
 
-
     duplicated_avaluations = {
-        "erros":{
+        "erros": {
             "value": int(before_duplicated),
             "type": "duplicate_avaluations",
         },

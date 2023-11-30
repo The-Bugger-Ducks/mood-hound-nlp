@@ -10,7 +10,6 @@ from utils.print_topic import init_topic, finish_topic_default
 from datetime import datetime
 
 
-
 # =============================================================================
 # Acessando os dados disponibilizados
 # =============================================================================
@@ -18,12 +17,19 @@ def step1_access_data():
     init_topic("Acessando os dados disponibilizados...")
     df = access_data()
     exec_time = finish_topic_default()
-    insert_stats([{"erros":[]}])
+    insert_stats([{"erros": []}])
 
-    update_stats({"metrics": {"stage": "Acesso aos dados", "day": datetime.now(), "time": exec_time}})
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Acesso aos dados",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
 
     return df
-
 
 
 # =============================================================================
@@ -35,7 +41,15 @@ def step2_pre_processing(df):
     df = pre_processing(df)
     exec_time = finish_topic_default()
 
-    update_stats({"metrics": {"stage": "Pré processamento", "day": datetime.now(), "time": exec_time}})
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Pré processamento",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
 
     return df
 
@@ -48,7 +62,15 @@ def step_extra_testing_classification_model(df):
     testing(df)
     exec_time = finish_topic_default()
 
-    update_stats({"metrics": {"stage": "Treinamento do modelo", "day": datetime.now(), "time": exec_time}})
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Treinamento do modelo",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
 
 
 # =============================================================================
@@ -60,7 +82,15 @@ def step3_processing(df):
     df = processing(df)
     exec_time = finish_topic_default()
 
-    update_stats({"metrics": {"stage": "Processamento de dados", "day": datetime.now(), "time": exec_time}})
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Processamento de dados",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
 
     return df
 
@@ -73,8 +103,15 @@ def step4_storage_data(df):
     insert(df)
     exec_time = finish_topic_default()
 
-    update_stats({"metrics": {"stage":"Armazenamento de dados", "day": datetime.now(), "time":exec_time}})
-
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Armazenamento de dados",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
 
 
 def step5_update_data(df):
@@ -82,4 +119,12 @@ def step5_update_data(df):
     update_stats(df)
     exec_time = finish_topic_default()
 
-    update_stats({"metrics": {"stage":"Atualizando métricas", "day": datetime.now(), "time":exec_time}})
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Atualizando métricas",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )

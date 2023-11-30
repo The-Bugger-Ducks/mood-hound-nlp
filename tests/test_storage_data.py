@@ -36,7 +36,7 @@ class TestStoreData(unittest.TestCase):
     def test_insert_stats(self):
         data = {
             "model_accuracy": [0.3],
-            "model_precision":[0.3], 
+            "model_precision": [0.3],
         }
 
         result = store.insert_stats(data)
@@ -48,11 +48,7 @@ class TestStoreData(unittest.TestCase):
     def test_update_stats(self):
         result = store.update_stats(10)
 
-        
-        self.assertEqual(
-            result, "Informação atualizada"
-        )
-
+        self.assertEqual(result, "Informação atualizada")
 
 
 if __name__ == "__main__":
