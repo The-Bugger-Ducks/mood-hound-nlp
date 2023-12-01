@@ -1,0 +1,10 @@
+[
+  {
+      "text": "Produto muito bom.",
+      "sentiment": "Positivo"
+  },
+  {
+      "text": "Produto péssimo",
+      "sentiment": "Negativo"
+  }
+]

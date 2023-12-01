@@ -1,28 +1,38 @@
-import os
-import sys
-pipeline_path = os.path.dirname(os.path.realpath(__file__)) + '/pipeline'
-sys.path.insert(0, pipeline_path)
+from timeit import timeit
+from datetime import datetime, timedelta
 
-import pipeline
+from pipeline.pipeline import (
+    step1_access_data,
+    step2_pre_processing,
+    step3_processing,
+    step4_storage_data,
+    step5_update_data,
+    step_extra_testing_classification_model,
+)
 
-# Acessando os dados disponibilizados
-results = pipeline.access_data()
 
-# Análise exploratória e adaptações
-results = pipeline.clear_data(results)
+def pipe():
+    # Acessando os dados disponibilizados
+    results = step1_access_data()
 
-# Treinando modelo de análise de sentimento
-# pipeline.training_classification_model()
+    # Análise exploratória e adaptações
+    results = step2_pre_processing(results)
 
-# Selecionando dados a serem utilizados na classificação
-results = pipeline.select_data(results)
+    # Treinando modelo de análise de sentimento
+    # step_extra_testing_classification_model(results)
 
-# Processamento dos dados
-results = pipeline.processing(results)
+    # Processamento dos dados
+    results = step3_processing(results)
 
-# Visualização dos resultados
-pipeline.show_results(results)
+    # Armazenamento dos dados
+    results = step4_storage_data(results)
 
-# Armazenamento dos dados
-results = pipeline.storage_data(results)
 
+tempo = timeit("pipe()", globals=globals(), number=1)
+timedelta_time = timedelta(seconds=tempo)
+format = str(timedelta_time)
+data_format = {
+    "metrics": {"stage": "Pipeline completa", "day": datetime.now(), "time": format}
+}
+
+step5_update_data(data_format)

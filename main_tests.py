@@ -4,7 +4,7 @@ import unittest
 import coverage
 
 
-tests_path = os.path.dirname(os.path.realpath(__file__)) + '/tests'
+tests_path = os.path.dirname(os.path.realpath(__file__)) + "/tests"
 sys.path.insert(0, tests_path)
 
 cov = coverage.Coverage()
@@ -19,11 +19,6 @@ runner.run(suite)
 
 cov.stop()
 
-cov.xml_report(outfile='coverage.xml')
+cov.report()
 
-
-
-
-
-
-
+cov.xml_report(outfile="coverage.xml")

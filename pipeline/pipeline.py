@@ -1,82 +1,130 @@
-import os
-import sys
-utils_path = os.getcwd() + '/utils'
-sys.path.insert(0, utils_path)
+from pipeline.access_data import access_data
+from pipeline.clear_data import clear_data
+from pipeline.select_data import select_data
+from pipeline.pre_processing import pre_processing
+from pipeline.processing import processing
+from pipeline.storage import insert, insert_stats, update_stats
 
-import print_topic
+from utils.test_classification_model import testing
+from utils.print_topic import init_topic, finish_topic_default
+from datetime import datetime
 
-access = __import__('access_data')
-clear = __import__('clear_data')
-select = __import__('select_data')
-training_model = __import__('training_model')
-processing_data = __import__('processing')
-store = __import__('storage')
-show = __import__('show_results')
 
 # =============================================================================
 # Acessando os dados disponibilizados
 # =============================================================================
-def access_data():
-  print_topic.init('Acessando os dados disponibilizados...')
-  df = access.access_data()
-  print_topic.finish_default()
+def step1_access_data():
+    init_topic("Acessando os dados disponibilizados...")
+    df = access_data()
+    exec_time = finish_topic_default()
+    insert_stats([{"erros": []}])
 
-  return df
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Acesso aos dados",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
+
+    return df
+
 
 # =============================================================================
 # Análise exploratória e adaptações
 # =============================================================================
-def clear_data(df):
-  print_topic.init('Análise exploratória e adaptações...')
-  df = clear.clear_data(df)
-  print_topic.finish_default()
+def step2_pre_processing(df):
+    init_topic("Pré processamento: análise exploratória, adaptações...")
+    df = clear_data(df)
+    df = pre_processing(df)
+    exec_time = finish_topic_default()
 
-  return df
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Pré processamento",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
+
+    return df
+
 
 # =============================================================================
 # Treinando o modelo de análise de sentimento
 # =============================================================================
-def training_classification_model():
-  print_topic.init('Treinando o modelo de análise de sentimento...')
-  classified_reviews = training_model.select_data()
-  separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, True)
-  training_model.training(separated_reviews['training_data'],separated_reviews['testing_data'])
-  training_model.get_accuracy_and_precision(separated_reviews['training_data'],separated_reviews['testing_data'])
-  print_topic.finish_default()
+def step_extra_testing_classification_model(df):
+    init_topic("Testando o modelo de análise de sentimento...")
+    testing(df)
+    exec_time = finish_topic_default()
 
-# =============================================================================
-# Selecionando e classificando o sentimento (positivo ou negativo)
-# =============================================================================
-def select_data(df):
-  print_topic.init('Selecionando e classificando o sentimento (positivo ou negativo)...')
-  df = select.select_data(df)
-  classified_reviews = training_model.select_data()
-  separated_reviews = training_model.separate_training_and_testing_data(classified_reviews, False)
-  df = training_model.classification_model(separated_reviews['training_data'], df)
-  print_topic.finish_default()
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Treinamento do modelo",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
 
-  return df
 
 # =============================================================================
 # Processamento dos dados
 # =============================================================================
-def processing(df):
-  print_topic.init('Processamento dos dados...')
-  df = processing_data.processing(df)
-  print_topic.finish_default()
+def step3_processing(df):
+    init_topic("Processamento dos dados...")
+    df = select_data(df)
+    df = processing(df)
+    exec_time = finish_topic_default()
 
-  return df
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Processamento de dados",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
+
+    return df
+
 
 # =============================================================================
 # Armazenamento dos dados
 # =============================================================================
-def storage_data(df):
-  print_topic.init('Armazenando os dados...')
-  store.insert(df)
-  print_topic.finish_default()
+def step4_storage_data(df):
+    init_topic("Armazenando os dados...")
+    insert(df)
+    exec_time = finish_topic_default()
 
-# =============================================================================
-# Visualização dos resultados
-# =============================================================================
-def show_results(df):
-  show.show_results(df)
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Armazenamento de dados",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
+
+
+def step5_update_data(df):
+    init_topic("Armazenando tempo de execução...")
+    update_stats(df)
+    exec_time = finish_topic_default()
+
+    update_stats(
+        {
+            "metrics": {
+                "stage": "Atualizando métricas",
+                "day": datetime.now(),
+                "time": exec_time,
+            }
+        }
+    )
