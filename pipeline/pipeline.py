@@ -18,8 +18,8 @@ def step1_access_data():
     df = access_data()
     exec_time = finish_topic_default()
     insert_stats([
-        {"erros": [],
-         "created_at" : datetime.now()}])
+        {"created_at" : datetime.now(), 
+         "erros": []}])
 
     update_stats(
         {
