@@ -46,7 +46,7 @@ def clear_data(df):
     print(analysis_table)
 
     # Coleta de metricas
-    data_analysis_table = {"metrics": {"total_of_data": int(df.count().sum())}}
+    data_analysis_table = {"metrics": {"total_of_data": int(len(df))}}
 
     update_stats(data_analysis_table)
 
