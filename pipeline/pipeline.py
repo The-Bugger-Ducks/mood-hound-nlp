@@ -17,7 +17,9 @@ def step1_access_data():
     init_topic("Acessando os dados disponibilizados...")
     df = access_data()
     exec_time = finish_topic_default()
-    insert_stats([{"erros": []}])
+    insert_stats([
+        {"erros": [],
+         "created_at" : datetime.now()}])
 
     update_stats(
         {
@@ -29,7 +31,11 @@ def step1_access_data():
         }
     )
 
+    
+
     return df
+
+
 
 
 # =============================================================================
@@ -128,3 +134,5 @@ def step5_update_data(df):
             }
         }
     )
+
+
